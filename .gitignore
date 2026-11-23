@@ -1,0 +1,7 @@
+.venv/
+.env
+.hermes_home/
+runs/
+__pycache__/
+*.pyc
+.pytest_cache/

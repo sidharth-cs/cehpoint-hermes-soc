@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "investigation_plan.schema.json",
+  "title": "Investigation Plan",
+  "description": "Structured plan produced by the Hermes agent for one alert. Steps may only name approved tools.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["alert_id", "summary", "hypotheses", "steps", "questions", "safety_notes"],
+  "properties": {
+    "alert_id": {"type": "string"},
+    "summary": {"type": "string", "maxLength": 1500},
+    "hypotheses": {
+      "type": "array", "minItems": 1, "maxItems": 6,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^H[0-9]+$"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "steps": {
+      "type": "array", "minItems": 1, "maxItems": 12,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["step", "objective", "tool", "arguments", "rationale", "evidence_sought"],
+        "properties": {
+          "step": {"type": "integer", "minimum": 1},
+          "objective": {"type": "string"},
+          "tool": {"enum": ["search_logs", "lookup_ip", "search_cve", "get_asset_context", "none"]},
+          "arguments": {"type": "object"},
+          "rationale": {"type": "string"},
+          "evidence_sought": {"type": "string"},
+          "tests_hypotheses": {"type": "array", "items": {"type": "string", "pattern": "^H[0-9]+$"}}
+        }
+      }
+    },
+    "questions": {
+      "type": "array", "minItems": 1,
+      "items": {"type": "string"},
+      "description": "The investigation questions this plan sets out to answer."
+    },
+    "safety_notes": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Actions that will need analyst approval, and anything the agent must not do."
+    }
+  }
+}

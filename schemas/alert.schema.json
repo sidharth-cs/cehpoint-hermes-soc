@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "alert.schema.json",
+  "title": "SOC Alert",
+  "description": "A security alert raised by the SIEM / detection layer. The agent consumes it; it does not create it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["alert_id", "created_at", "source", "rule", "severity_hint", "entities", "summary", "data_provenance"],
+  "properties": {
+    "alert_id": {"type": "string", "pattern": "^ALR-[0-9]{4}-[0-9]{4,}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "source": {"type": "string", "description": "Detection system that raised the alert, e.g. synthetic-siem"},
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": {"type": "string"},
+        "name": {"type": "string"},
+        "description": {"type": "string"}
+      }
+    },
+    "severity_hint": {"enum": ["low", "medium", "high", "critical"], "description": "Severity suggested by the detection rule. The agent reassesses it."},
+    "entities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["account"],
+      "properties": {
+        "account": {"type": "string"},
+        "host": {"type": "string"},
+        "source_ips": {"type": "array", "items": {"type": "string", "format": "ipv4"}, "maxItems": 50},
+        "domains": {"type": "array", "items": {"type": "string"}, "maxItems": 50}
+      }
+    },
+    "observations": {
+      "type": "object",
+      "description": "Counts and window the detection rule observed.",
+      "additionalProperties": false,
+      "properties": {
+        "failed_logins": {"type": "integer", "minimum": 0},
+        "successful_logins": {"type": "integer", "minimum": 0},
+        "window_start": {"type": "string", "format": "date-time"},
+        "window_end": {"type": "string", "format": "date-time"}
+      }
+    },
+    "summary": {"type": "string", "maxLength": 2000},
+    "data_provenance": {"enum": ["synthetic", "cehpoint-sample", "lab"], "description": "Where the alert data came from. Only authorized sources are allowed."}
+  }
+}

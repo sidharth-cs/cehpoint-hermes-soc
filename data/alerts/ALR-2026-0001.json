@@ -1,0 +1,25 @@
+{
+  "alert_id": "ALR-2026-0001",
+  "created_at": "2026-11-23T03:14:22Z",
+  "source": "synthetic-siem",
+  "rule": {
+    "id": "AUTH-BRUTE-SUCCESS",
+    "name": "Repeated failed logins followed by success from unfamiliar IP",
+    "description": "50+ failed logins for one account within 15 minutes, then a successful login from an IP not seen for this account in the last 30 days."
+  },
+  "severity_hint": "high",
+  "entities": {
+    "account": "j.doe@example.com",
+    "host": "WS-FIN-014",
+    "source_ips": ["203.0.113.45"],
+    "domains": []
+  },
+  "observations": {
+    "failed_logins": 50,
+    "successful_logins": 1,
+    "window_start": "2026-11-23T02:58:05Z",
+    "window_end": "2026-11-23T03:13:51Z"
+  },
+  "summary": "50 failed logins against j.doe@example.com from 203.0.113.45 between 02:58 and 03:13 UTC, followed by a successful login from the same IP at 03:13:51 UTC. The IP has no prior history for this account.",
+  "data_provenance": "synthetic"
+}
