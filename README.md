@@ -4,12 +4,12 @@
 
 <p align="center">
   <a href="https://github.com/sidharth-cs/cehpoint-hermes-soc/actions/workflows/tests.yml"><img src="https://github.com/sidharth-cs/cehpoint-hermes-soc/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
-  <img src="https://img.shields.io/badge/python-3.11-3776AB?logo=python&logoColor=white" alt="Python 3.11">
-  <img src="https://img.shields.io/badge/Hermes%20Agent-0.16-7c3aed" alt="Hermes Agent 0.16">
-  <img src="https://img.shields.io/badge/model-DeepSeek-0ea5e9?style=flat" alt="DeepSeek">
-  <img src="https://img.shields.io/badge/MITRE-ATT%26CK-ef4444?style=flat" alt="MITRE ATT&CK">
-  <img src="https://img.shields.io/badge/human--in--the--loop-required-22c55e" alt="human in the loop">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
+  <img src="docs/assets/badges/python.svg" alt="Python 3.11">
+  <img src="docs/assets/badges/hermes.svg" alt="Hermes Agent 0.16">
+  <img src="docs/assets/badges/deepseek.svg" alt="DeepSeek">
+  <img src="docs/assets/badges/mitre.svg" alt="MITRE ATT&CK">
+  <img src="docs/assets/badges/hitl.svg" alt="human in the loop">
+  <a href="LICENSE"><img src="docs/assets/badges/license.svg" alt="MIT license"></a>
 </p>
 
 <p align="center">
