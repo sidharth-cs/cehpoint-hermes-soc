@@ -1,3 +1,8 @@
 hermes-agent==0.16.0
 jsonschema>=4.21
 pytest>=8
+certifi>=2024.2
+fastapi==0.165.0
+uvicorn==0.54.0
+httpx==0.28.1
+pyyaml>=6

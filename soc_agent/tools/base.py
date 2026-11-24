@@ -20,6 +20,8 @@ from typing import Callable
 
 from jsonschema import Draft202012Validator, FormatChecker
 
+from ..paths import fixture_mode
+
 REASON = {"type": "string", "minLength": 10, "maxLength": 300,
           "description": "One sentence: why this call is needed for the investigation."}
 
@@ -39,15 +41,24 @@ class ToolSpec:
     parameters: dict
     result_schema: dict
     func: Callable[[dict], dict]
-    source: str
-    mock: bool
+    source: str                      # live data source
+    mock: bool                       # True = in test-fixture mode this tool's data is synthetic intel
     timeout_s: float = 5.0
+    fixture_source: str = "test fixture (tests/fixtures/)"
     _arg_validator: Draft202012Validator = field(init=False, repr=False)
     _out_validator: Draft202012Validator = field(init=False, repr=False)
 
     def __post_init__(self):
         self._arg_validator = Draft202012Validator(self.parameters, format_checker=FormatChecker())
         self._out_validator = Draft202012Validator(self.result_schema, format_checker=FormatChecker())
+
+    @property
+    def current_source(self) -> str:
+        return self.fixture_source if fixture_mode() else self.source
+
+    @property
+    def is_mock(self) -> bool:
+        return self.mock and fixture_mode()
 
     def hermes_schema(self) -> dict:
         return {"name": self.name, "description": self.description, "parameters": self.parameters}
@@ -96,7 +107,7 @@ _pool = ThreadPoolExecutor(max_workers=4, thread_name_prefix="soc-tool")
 
 def execute(spec: ToolSpec, args: dict) -> dict:
     started = time.monotonic()
-    env = {"tool": spec.name, "ok": False, "source": spec.source, "mock": spec.mock, "result": None, "error": None}
+    env = {"tool": spec.name, "ok": False, "source": spec.current_source, "mock": spec.is_mock, "result": None, "error": None}
 
     def finish(**kw):
         env.update(kw)
@@ -111,8 +122,8 @@ def execute(spec: ToolSpec, args: dict) -> dict:
                 "result_summary": _summarize(env["result"]),
                 "result": env["result"],
                 "duration_ms": env["duration_ms"],
-                "source": spec.source,
-                "mock": spec.mock,
+                "source": spec.current_source,
+                "mock": spec.is_mock,
             })
         return env
 
@@ -124,7 +135,7 @@ def execute(spec: ToolSpec, args: dict) -> dict:
 
     fault = _injected_fault(spec.name)
     if fault == "unavailable":
-        return finish(error={"code": "data_unavailable", "message": f"{spec.source} is unavailable (injected fault)"})
+        return finish(error={"code": "data_unavailable", "message": f"{spec.current_source} is unavailable (injected fault)"})
 
     def run():
         if fault == "timeout":

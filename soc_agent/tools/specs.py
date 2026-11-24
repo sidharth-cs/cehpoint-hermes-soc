@@ -7,7 +7,8 @@ from . import data
 from .base import REASON, ToolInputError, ToolSpec
 
 MAX_WINDOW = timedelta(days=31)
-EVENT_TYPES = ["auth_failure", "auth_success", "logout", "mailbox_rule_created", "file_access"]
+EVENT_TYPES = ["auth_failure", "auth_success", "logout", "mailbox_rule_created", "file_access", "blocked_request",
+               "response_action"]
 DOC_NETS = [ipaddress.ip_network(n) for n in ("192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24")]
 
 
@@ -27,8 +28,8 @@ def _search_logs(args: dict) -> dict:
     if not any(args.get(k) for k in ("account", "host", "src_ip")):
         raise ToolInputError("give at least one of account, host or src_ip (no unbounded log dumps)")
     start, end = _ts(args["start"]), _ts(args["end"])
-    if end <= start:
-        raise ToolInputError("end must be after start")
+    if end < start:  # equal is allowed: a single-instant alert window
+        raise ToolInputError("end must not be before start")
     if end - start > MAX_WINDOW:
         raise ToolInputError("time window is limited to 31 days")
     limit = args.get("limit", 100)
@@ -67,7 +68,7 @@ def _search_logs(args: dict) -> dict:
 
 SEARCH_LOGS = ToolSpec(
     name="search_logs",
-    description=("Search the authentication and host event log (synthetic dataset). Filter by account, host and/or "
+    description=("Search the authentication and application event log of the lab portal. Filter by account, host and/or "
                  "source IP within a time window (max 31 days). Returns matching events with a `ref` you can cite as "
                  "evidence, plus counts by event type, IP and account."),
     parameters={
@@ -93,7 +94,7 @@ SEARCH_LOGS = ToolSpec(
         },
     },
     func=_search_logs,
-    source="synthetic log store (data/logs/events.jsonl)",
+    source="lab portal live event log (lab/state/events.jsonl)",
     mock=False,
 )
 
@@ -101,7 +102,7 @@ SEARCH_LOGS = ToolSpec(
 # --------------------------------------------------------------------------- lookup_ip
 def _ip_class(ip: ipaddress.IPv4Address) -> str:
     if any(ip in n for n in DOC_NETS):
-        return "documentation range (RFC 5737), synthetic"
+        return "documentation range (RFC 5737)"
     if ip.is_private:
         return "private"
     if ip.is_loopback or ip.is_reserved or ip.is_multicast:
@@ -111,10 +112,12 @@ def _ip_class(ip: ipaddress.IPv4Address) -> str:
 
 def _lookup_ip(args: dict) -> dict:
     ip = ipaddress.ip_address(args["ip"])
-    intel = data.ip_intel()
-    rec = intel.get(str(ip))
-    out = {"ip": str(ip), "ip_class": _ip_class(ip), "found": rec is not None,
-           "intel_source": intel.get("_meta", {}).get("source", "unknown")}
+    cls = _ip_class(ip)
+    if cls != "public" and not data.fixture_mode():
+        return {"ip": str(ip), "ip_class": cls, "found": False, "intel_source": "not queried",
+                "note": f"{cls}: not routable on the internet, so no public reputation exists for it."}
+    rec, source = data.ip_lookup(str(ip))
+    out = {"ip": str(ip), "ip_class": cls, "found": rec is not None, "intel_source": source}
     if rec:
         out.update({k: rec.get(k) for k in ("verdict", "score", "tags", "asn", "country", "first_seen", "last_seen", "reports")})
     else:
@@ -124,8 +127,9 @@ def _lookup_ip(args: dict) -> dict:
 
 LOOKUP_IP = ToolSpec(
     name="lookup_ip",
-    description=("Reputation and context for one IPv4 address from the MOCK intel file. Results are synthetic test "
-                 "data and must be reported as mock, never as live threat intelligence."),
+    description=("Reputation and context for one IPv4 address from a live public source (AbuseIPDB when a key is "
+                 "configured, otherwise ipinfo.io, which gives context but no reputation score). Reserved and "
+                 "documentation ranges are not queried: they have no public reputation."),
     parameters={
         "type": "object", "additionalProperties": False, "required": ["reason", "ip"],
         "properties": {"reason": REASON, "ip": {"type": "string", "format": "ipv4"}},
@@ -135,8 +139,10 @@ LOOKUP_IP = ToolSpec(
         "properties": {"found": {"type": "boolean"}, "score": {"type": ["integer", "null"], "minimum": 0, "maximum": 100}},
     },
     func=_lookup_ip,
-    source="MOCK IP reputation (data/intel/ip_reputation_mock.json)",
+    source="AbuseIPDB / ipinfo.io (live public API)",
     mock=True,
+    timeout_s=8.0,
+    fixture_source="MOCK IP reputation (tests/fixtures/ip_intel.json)",
 )
 
 
@@ -147,6 +153,9 @@ def _search_cve(args: dict) -> dict:
     snap = data.threat_intel()
     kind = args.get("kind")
     entries = [e for e in snap.get("entries", []) if not kind or e.get("kind") == kind]
+    cve_id = args["id"] if args.get("id", "").upper().startswith("CVE-") else None
+    if kind != "attack_technique" and (cve_id or args.get("query")):
+        entries = entries + data.nvd_search(args.get("query"), cve_id, args.get("limit", 5))
     if args.get("id"):
         matches = [e for e in entries if e["id"].upper() == args["id"].upper()]
     else:
@@ -164,14 +173,15 @@ def _search_cve(args: dict) -> dict:
         "snapshot_date": snap.get("_meta", {}).get("snapshot_date"),
         "matches": [{k: e.get(k) for k in ("id", "kind", "name", "tactic", "cvss", "summary", "affects") if e.get(k) is not None}
                     for e in matches],
-        "note": "No match in the local snapshot. This does not mean no relevant CVE or technique exists." if not matches else None,
+        "note": "No match. This does not mean no relevant CVE or technique exists." if not matches else None,
     }
 
 
 SEARCH_CVE = ToolSpec(
     name="search_cve",
-    description=("Search a small MOCK offline snapshot of CVEs and MITRE ATT&CK techniques by keywords or exact id. "
-                 "Use it to map observed behaviour to ATT&CK techniques or check known vulnerabilities of software."),
+    description=("Search MITRE ATT&CK techniques (official data, local copy) and CVEs (live NIST NVD API) by keywords "
+                 "or exact id. Use it to map observed behaviour to ATT&CK techniques or check software vulnerabilities. "
+                 "Use kind=attack_technique for behaviour mapping (fast, no network)."),
     parameters={
         "type": "object", "additionalProperties": False, "required": ["reason"],
         "properties": {
@@ -187,8 +197,10 @@ SEARCH_CVE = ToolSpec(
         "properties": {"matches": {"type": "array", "items": {"type": "object", "required": ["id", "kind", "name"]}}},
     },
     func=_search_cve,
-    source="MOCK local snapshot (data/intel/threat_intel_snapshot.json)",
+    source="MITRE ATT&CK (lab/intel/attack_techniques.json) + NIST NVD (live API)",
     mock=True,
+    timeout_s=10.0,
+    fixture_source="MOCK snapshot (tests/fixtures/threat_intel.json)",
 )
 
 
@@ -223,7 +235,7 @@ GET_ASSET_CONTEXT = ToolSpec(
     },
     result_schema={"type": "object", "required": ["found"], "properties": {"found": {"type": "boolean"}}},
     func=_get_asset_context,
-    source="synthetic asset inventory (data/assets/inventory.json)",
+    source="lab asset inventory (lab/inventory.json)",
     mock=False,
 )
 

@@ -16,7 +16,7 @@ def test_search_logs_finds_the_alert_pattern():
     res = r["result"]
     assert res["summary"]["by_event_type"] == {"auth_failure": 50, "auth_success": 1}
     assert res["summary"]["by_src_ip"] == {"203.0.113.45": 51}
-    assert all(e["ref"].startswith("data/logs/events.jsonl#L") for e in res["events"])
+    assert all(e["ref"].startswith("tests/fixtures/events.jsonl#L") for e in res["events"])
 
 
 def test_search_logs_reports_and_skips_malformed_lines():
@@ -37,7 +37,7 @@ def test_search_logs_truncates_to_limit():
 
 @pytest.mark.parametrize("args, code_or_text", [
     ({**WINDOW}, "at least one of"),                                                    # unbounded dump
-    ({"account": "j.doe@example.com", "start": WINDOW["end"], "end": WINDOW["start"]}, "after start"),
+    ({"account": "j.doe@example.com", "start": WINDOW["end"], "end": WINDOW["start"]}, "not be before start"),
     ({"account": "j.doe@example.com", "start": "2026-09-01T00:00:00Z", "end": "2026-11-23T00:00:00Z"}, "31 days"),
     ({"src_ip": "300.1.1.1", **WINDOW}, "ipv4"),
     ({"account": "j.doe@example.com", "start": "yesterday", "end": WINDOW["end"]}, "ISO-8601"),
@@ -58,7 +58,7 @@ def test_reason_is_required():
 # ---------- lookup_ip
 def test_lookup_ip_known_bad_is_labelled_mock():
     r = run_tool("lookup_ip", {"reason": R, "ip": "203.0.113.45"})
-    assert r["ok"] and r["mock"] is True and r["result"]["intel_source"] == "MOCK"
+    assert r["ok"] and r["mock"] is True and r["result"]["intel_source"].startswith("test fixture")
     assert r["result"]["verdict"] == "malicious"
     assert "documentation range" in r["result"]["ip_class"]
 
@@ -122,15 +122,14 @@ def test_crash_does_not_leak_traceback(monkeypatch):
 
 
 def test_missing_dataset_is_data_unavailable(monkeypatch, tmp_path):
-    monkeypatch.setattr(tool_data, "IP_INTEL", tmp_path / "missing.json")
+    monkeypatch.setattr(tool_data, "FIXTURES", tmp_path)  # no ip_intel.json there
     r = run_tool("lookup_ip", {"reason": R, "ip": "203.0.113.45"})
     assert r["error"]["code"] == "data_unavailable"
 
 
 def test_corrupt_dataset_is_data_unavailable(monkeypatch, tmp_path):
-    bad = tmp_path / "assets.json"
-    bad.write_text("{oops")
-    monkeypatch.setattr(tool_data, "ASSETS", bad)
+    (tmp_path / "inventory.json").write_text("{oops")
+    monkeypatch.setattr(tool_data, "FIXTURES", tmp_path)
     r = run_tool("get_asset_context", {"reason": R, "host": "WS-FIN-014"})
     assert r["error"]["code"] == "data_unavailable"
 

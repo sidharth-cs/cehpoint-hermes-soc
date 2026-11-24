@@ -10,7 +10,7 @@ import pytest
 from soc_agent import correlate
 from soc_agent.tools import BY_NAME, run_tool, start_trace, stop_trace
 
-ALERTS = Path(__file__).resolve().parent.parent / "data" / "alerts"
+ALERTS = Path(__file__).resolve().parent / "fixtures" / "alerts"
 R = "Gathering evidence for this investigation step."
 
 
@@ -57,7 +57,11 @@ def test_scenario_suspicious_account_compromise():
     assert {m["technique"] for m in correlate.attack_mapping(facts, calls)} == {"T1110.001", "T1110.003", "T1078", "T1114.003", "T1039"}
     for f in facts:                                  # every confirmed log-based fact cites evidence
         if f.status == "confirmed" and f.tools == ["search_logs"] and f.id != "F2":
-            assert f.refs and all(r.startswith("data/logs/events.jsonl#L") for r in f.refs)
+            assert f.refs and all(r.startswith("tests/fixtures/events.jsonl#L") for r in f.refs)
+    # live logs have millisecond timestamps; a search window given to the second still covers them
+    from datetime import datetime, timezone
+    ms = datetime(2026, 11, 24, 8, 3, 47, 512000, tzinfo=timezone.utc)
+    assert correlate._covers([(ms.replace(microsecond=0), ms.replace(microsecond=0))], ms, ms)
 
 
 # 2. Incomplete: no look-back and nothing searched after the login
@@ -140,3 +144,14 @@ def test_timeline_is_sorted_deduplicated_and_cited():
     rows = correlate.collapse_timeline([e for e in tl if "2026-11-23T02:58" <= e["ts"] <= "2026-11-23T03:30"])
     burst = next(r for r in rows if r["count"] == 50)
     assert burst["event_type"] == "auth_failure" and burst["src_ip"] == "203.0.113.45"
+
+
+# 9. Normal: an alert that turns out to be routine activity (corporate VPN login, MFA passed, usual hours)
+def test_scenario_normal_activity_is_low_with_nothing_to_act_on():
+    facts, calls, by = investigate(load("ALR-2026-0004"))
+    assert all(c["ok"] for c in calls)
+    assert by["F1"].status == "not_observed"        # no failures
+    assert by["F2"].status == "not_observed"        # IP seen for this account before
+    assert by["F8"].status == "not_observed"        # MFA enrolled
+    assert correlate.assess_severity(facts)["level"] == "low"
+    assert correlate.attack_mapping(facts, calls) == []

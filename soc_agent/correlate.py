@@ -12,10 +12,12 @@ Each fact has a status:
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timedelta
 
+from .tools.data import assets_ref
+
 BRUTE_FORCE_THRESHOLD = 10          # failed logins for one account before a success counts as brute force
 NEW_IP_LOOKBACK = timedelta(days=7)  # minimum look-back that must be searched to call an IP "new"
 POST_LOGIN_WINDOW = timedelta(hours=2)
-SCRIPTED_AGENTS = ("python-requests", "curl/", "go-http-client", "wget/", "hydra", "okhttp")
+SCRIPTED_AGENTS = ("python-requests", "python-httpx", "python-urllib", "curl/", "go-http-client", "wget/", "hydra", "okhttp")
 
 
 def _ts(s: str) -> datetime:
@@ -88,6 +90,8 @@ def _searched(calls, **match) -> list[tuple[datetime, datetime]]:
 
 
 def _covers(wins, start: datetime, end: datetime) -> bool:
+    # search windows are given to the second; live events carry milliseconds, so compare at second precision
+    start, end = start.replace(microsecond=0), end.replace(microsecond=0)
     return any(s <= start and e >= end for s, e in wins)
 
 
@@ -115,9 +119,9 @@ def build_facts(alert: dict, calls: list[dict]) -> list[Fact]:
 
     # F1 brute force followed by success from the same IP
     fails = [e for e in acct_events if e["event_type"] == "auth_failure" and (not ip or e["src_ip"] == ip)
-             and w_start <= _ts(e["ts"]) <= w_end]
+             and w_start <= _ts(e["ts"]).replace(microsecond=0) <= w_end]
     success = next((e for e in acct_events if e["event_type"] == "auth_success" and (not ip or e["src_ip"] == ip)
-                    and w_start <= _ts(e["ts"]) <= w_end + timedelta(minutes=1)), None)
+                    and w_start <= _ts(e["ts"]).replace(microsecond=0) <= w_end + timedelta(minutes=1)), None)
     window_searched = _covers(_searched(calls, account=account) + (_searched(calls, src_ip=ip) if ip else []), w_start, w_end)
     if not window_searched:
         facts.append(Fact("F1", f"Login pattern for {account} in the alert window could not be checked "
@@ -164,7 +168,7 @@ def build_facts(alert: dict, calls: list[dict]) -> list[Fact]:
     else:
         others = {}
         for e in timeline:
-            if e["src_ip"] == ip and e.get("account") != account and w_start <= _ts(e["ts"]) <= w_end:
+            if e["src_ip"] == ip and e.get("account") and e.get("account") != account and w_start <= _ts(e["ts"]).replace(microsecond=0) <= w_end:
                 o = others.setdefault(e["account"], {"failures": 0, "successes": 0, "refs": []})
                 if e["event_type"] == "auth_failure":
                     o["failures"] += 1
@@ -232,7 +236,7 @@ def build_facts(alert: dict, calls: list[dict]) -> list[Fact]:
         mfa = acct_ctx.get("mfa_enrolled")
         facts.append(Fact("F8", f"{account} is {'not ' if not mfa else ''}enrolled in MFA"
                                 f"{' (a password alone was enough to log in)' if not mfa else ''}.",
-                          "confirmed" if mfa is False else "not_observed", [f"data/assets/inventory.json#{account}"],
+                          "confirmed" if mfa is False else "not_observed", [f"{assets_ref()}#{account}"],
                           ["get_asset_context"], data={"mfa_enrolled": mfa, "privileged": acct_ctx.get("privileged")}))
         hours, usual_ips = acct_ctx.get("usual_hours_utc"), acct_ctx.get("usual_ips", [])
         off, parts = None, []
@@ -245,7 +249,7 @@ def build_facts(alert: dict, calls: list[dict]) -> list[Fact]:
             parts.append(f"{ip} is {'not ' if ip not in usual_ips else ''}one of the account's usual IPs")
         unusual = bool(off) or (ip is not None and ip not in usual_ips)
         facts.append(Fact("F9", ("; ".join(parts) + ".")[:1].upper() + ("; ".join(parts) + ".")[1:] if parts else "No login to compare with usual behaviour.",
-                          "confirmed" if unusual else "not_observed", [f"data/assets/inventory.json#{account}"],
+                          "confirmed" if unusual else "not_observed", [f"{assets_ref()}#{account}"],
                           ["get_asset_context"], data={"off_hours": off, "usual_ip": (ip in usual_ips) if ip else None}))
 
     if not host_ctx or not host_ctx.get("found"):
@@ -253,25 +257,31 @@ def build_facts(alert: dict, calls: list[dict]) -> list[Fact]:
     else:
         facts.append(Fact("F10", f"{host} is a {host_ctx.get('criticality')}-criticality {host_ctx.get('role', 'host')} "
                                  f"({host_ctx.get('department')}).",
-                          "confirmed", [f"data/assets/inventory.json#{host}"], ["get_asset_context"],
+                          "confirmed", [f"{assets_ref()}#{host}"], ["get_asset_context"],
                           data={"criticality": host_ctx.get("criticality")}))
 
-    # F11 IP reputation (mock)
+    # F11 IP reputation
     reps = _ok_calls(calls, "lookup_ip", ip=ip) if ip else []
     if not reps:
         failed = _failed(calls, "lookup_ip")
         why = f"the lookup failed ({failed[0]['error']['code']})" if failed else "it was not looked up"
-        facts.append(Fact("F11", f"Reputation of {ip} is unknown: {why}.", "unknown", tools=["lookup_ip"], mock=True))
-    elif not reps[0]["result"]["found"]:
-        facts.append(Fact("F11", f"{ip} is not in the (MOCK) intel source; unknown is not benign.", "unknown",
-                          tools=["lookup_ip"], mock=True))
+        facts.append(Fact("F11", f"Reputation of {ip} is unknown: {why}.", "unknown", tools=["lookup_ip"],
+                          mock=bool(failed and failed[0]["mock"])))
     else:
-        r = reps[0]["result"]
-        bad = r.get("verdict") in ("malicious", "suspicious")
-        facts.append(Fact("F11", f"MOCK intel rates {ip} as {r.get('verdict')} (score {r.get('score')}, "
-                                 f"tags {', '.join(r.get('tags') or [])}).",
-                          "confirmed" if bad else "not_observed", [f"data/intel/ip_reputation_mock.json#{ip}"],
-                          ["lookup_ip"], mock=True, data={"verdict": r.get("verdict"), "score": r.get("score")}))
+        c, r = reps[0], reps[0]["result"]
+        src, ref = r.get("intel_source", c["source"]), f"lookup_ip#{ip}"
+        if not r["found"] and r.get("ip_class", "public") != "public":
+            facts.append(Fact("F11", f"{ip} is a {r['ip_class']} address: no public reputation exists, so none was used.",
+                              "not_observed", [ref], ["lookup_ip"], mock=c["mock"], data={"ip_class": r["ip_class"]}))
+        elif not r["found"]:
+            facts.append(Fact("F11", f"{ip} is not in the intel source ({src}); unknown is not benign.", "unknown",
+                              [ref], ["lookup_ip"], mock=c["mock"]))
+        else:
+            bad = r.get("verdict") in ("malicious", "suspicious")
+            facts.append(Fact("F11", f"{'MOCK intel' if c['mock'] else src} rates {ip} as {r.get('verdict')} "
+                                     f"(score {r.get('score')}, tags {', '.join(t for t in (r.get('tags') or []) if t)}).",
+                              "confirmed" if bad else "not_observed", [ref], ["lookup_ip"], mock=c["mock"],
+                              data={"verdict": r.get("verdict"), "score": r.get("score")}))
     return facts
 
 
@@ -335,7 +345,7 @@ def assess_confidence(facts: list[Fact], calls: list[dict]) -> dict:
     if by["F1"].status == "confirmed" and by.get("F9") and by["F9"].status == "not_observed":
         penalty += 1
         reasons.append("conflict: brute-force pattern, yet the login came from a usual IP at usual hours (F1 vs F9)")
-    if by.get("F11") and by["F11"].status == "confirmed":
+    if by.get("F11") and by["F11"].status == "confirmed" and by["F11"].mock:
         reasons.append("F11 comes from MOCK intel; it supports the conclusion but is not relied on alone")
     level = "high" if penalty == 0 else "medium" if penalty <= 2 else "low"
     if not unknown and not failures:

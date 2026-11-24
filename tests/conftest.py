@@ -1,11 +1,14 @@
 import copy
 import json
+import os
+
+os.environ["SOC_DATA"] = "fixtures"  # tests read the frozen synthetic dataset, never the live lab or the internet
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-SAMPLE = ROOT / "data" / "alerts" / "ALR-2026-0001.json"
+SAMPLE = ROOT / "tests" / "fixtures" / "alerts" / "ALR-2026-0001.json"
 
 
 @pytest.fixture
@@ -44,3 +47,16 @@ def audit(tmp_path):
 
 def clone(d):
     return copy.deepcopy(d)
+
+
+@pytest.fixture(autouse=True)
+def lab_calls(monkeypatch):
+    """Approved actions would call the lab portal's admin API; tests record the calls instead."""
+    calls = []
+
+    def fake(req, run_id, analyst):
+        calls.append({"action": req["action"], "target": req["target"], "analyst": analyst, "run_id": run_id})
+        return {"ok": True, "controls": {}}
+
+    monkeypatch.setattr("soc_agent.response.execute_on_lab", fake)
+    return calls

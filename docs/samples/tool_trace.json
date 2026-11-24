@@ -1,0 +1,1846 @@
+{
+  "alert_id": "ALR-2026-1001",
+  "calls": [
+    {
+      "seq": 1,
+      "tool": "search_logs",
+      "reason": "Step 1: confirm the failed-login count, timestamps, and the successful login in raw events for the alert account and host in the alert window.",
+      "arguments": {
+        "account": "j.doe@lab.example",
+        "host": "LAB-PORTAL-01",
+        "start": "2026-11-24T08:03:37Z",
+        "end": "2026-11-24T08:03:47Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=49",
+      "result": {
+        "returned": 49,
+        "total_matched": 49,
+        "truncated": false,
+        "skipped_malformed_lines": 0,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 49
+          },
+          "by_src_ip": {
+            "203.0.113.45": 49
+          },
+          "by_account": {
+            "j.doe@lab.example": 49
+          },
+          "first_ts": "2026-11-24T08:03:39.407Z",
+          "last_ts": "2026-11-24T08:03:46.993Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-e86adc9b8789",
+            "ts": "2026-11-24T08:03:39.407Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L22"
+          },
+          {
+            "event_id": "EVT-7a2b57e45281",
+            "ts": "2026-11-24T08:03:39.567Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L23"
+          },
+          {
+            "event_id": "EVT-d88ef1f073f3",
+            "ts": "2026-11-24T08:03:39.726Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L24"
+          },
+          {
+            "event_id": "EVT-39afff0ad73d",
+            "ts": "2026-11-24T08:03:39.884Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L25"
+          },
+          {
+            "event_id": "EVT-6625a621a220",
+            "ts": "2026-11-24T08:03:40.041Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L26"
+          },
+          {
+            "event_id": "EVT-ac884b50ed12",
+            "ts": "2026-11-24T08:03:40.201Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L27"
+          },
+          {
+            "event_id": "EVT-8ff7ba28dd8d",
+            "ts": "2026-11-24T08:03:40.360Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L28"
+          },
+          {
+            "event_id": "EVT-29f54ba8e4a1",
+            "ts": "2026-11-24T08:03:40.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L29"
+          },
+          {
+            "event_id": "EVT-2d37ae0d44f3",
+            "ts": "2026-11-24T08:03:40.675Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L30"
+          },
+          {
+            "event_id": "EVT-d27c42e0839a",
+            "ts": "2026-11-24T08:03:40.834Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L31"
+          },
+          {
+            "event_id": "EVT-15989e120780",
+            "ts": "2026-11-24T08:03:40.991Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L32"
+          },
+          {
+            "event_id": "EVT-71aa32eec399",
+            "ts": "2026-11-24T08:03:41.149Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L33"
+          },
+          {
+            "event_id": "EVT-c0cd61e4e3f7",
+            "ts": "2026-11-24T08:03:41.308Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L34"
+          },
+          {
+            "event_id": "EVT-11a0900bc463",
+            "ts": "2026-11-24T08:03:41.465Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L35"
+          },
+          {
+            "event_id": "EVT-c90d71fb5427",
+            "ts": "2026-11-24T08:03:41.624Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L36"
+          },
+          {
+            "event_id": "EVT-c386ec2ae1a3",
+            "ts": "2026-11-24T08:03:41.783Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L37"
+          },
+          {
+            "event_id": "EVT-f2fcd3ef665e",
+            "ts": "2026-11-24T08:03:41.938Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L38"
+          },
+          {
+            "event_id": "EVT-1559e63f0c59",
+            "ts": "2026-11-24T08:03:42.097Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L39"
+          },
+          {
+            "event_id": "EVT-4379e68e72ca",
+            "ts": "2026-11-24T08:03:42.257Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L40"
+          },
+          {
+            "event_id": "EVT-674c081bba62",
+            "ts": "2026-11-24T08:03:42.413Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L41"
+          },
+          {
+            "event_id": "EVT-cd2b9d0212e3",
+            "ts": "2026-11-24T08:03:42.568Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L42"
+          },
+          {
+            "event_id": "EVT-1648da94c7f2",
+            "ts": "2026-11-24T08:03:42.727Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L43"
+          },
+          {
+            "event_id": "EVT-7bffe2a29873",
+            "ts": "2026-11-24T08:03:42.886Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L44"
+          },
+          {
+            "event_id": "EVT-487777cb04ae",
+            "ts": "2026-11-24T08:03:43.045Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L45"
+          },
+          {
+            "event_id": "EVT-730b0856111d",
+            "ts": "2026-11-24T08:03:43.201Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L46"
+          },
+          {
+            "event_id": "EVT-4f00e1047121",
+            "ts": "2026-11-24T08:03:43.360Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L47"
+          },
+          {
+            "event_id": "EVT-6d36992a68b5",
+            "ts": "2026-11-24T08:03:43.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L48"
+          },
+          {
+            "event_id": "EVT-72e5e9b13dc8",
+            "ts": "2026-11-24T08:03:43.678Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L49"
+          },
+          {
+            "event_id": "EVT-7a7a37bef8ac",
+            "ts": "2026-11-24T08:03:43.837Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L50"
+          },
+          {
+            "event_id": "EVT-1f39094e723c",
+            "ts": "2026-11-24T08:03:43.996Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L51"
+          },
+          {
+            "event_id": "EVT-8fb1a3b9a6d9",
+            "ts": "2026-11-24T08:03:44.151Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L52"
+          },
+          {
+            "event_id": "EVT-78be75a88455",
+            "ts": "2026-11-24T08:03:44.311Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L53"
+          },
+          {
+            "event_id": "EVT-9e0d7b79cd5e",
+            "ts": "2026-11-24T08:03:44.467Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L54"
+          },
+          {
+            "event_id": "EVT-5328b68cbf46",
+            "ts": "2026-11-24T08:03:44.627Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L55"
+          },
+          {
+            "event_id": "EVT-a434443761ce",
+            "ts": "2026-11-24T08:03:44.786Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L56"
+          },
+          {
+            "event_id": "EVT-7555a7af0b16",
+            "ts": "2026-11-24T08:03:44.942Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L57"
+          },
+          {
+            "event_id": "EVT-4e2d79b4ca76",
+            "ts": "2026-11-24T08:03:45.099Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L58"
+          },
+          {
+            "event_id": "EVT-0b6385d923cb",
+            "ts": "2026-11-24T08:03:45.259Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L59"
+          },
+          {
+            "event_id": "EVT-c6caca6b1330",
+            "ts": "2026-11-24T08:03:45.416Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L60"
+          },
+          {
+            "event_id": "EVT-dcd863c501e5",
+            "ts": "2026-11-24T08:03:45.575Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L61"
+          },
+          {
+            "event_id": "EVT-ee370618ced3",
+            "ts": "2026-11-24T08:03:45.730Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L62"
+          },
+          {
+            "event_id": "EVT-6998aaca2804",
+            "ts": "2026-11-24T08:03:45.888Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L63"
+          },
+          {
+            "event_id": "EVT-a60ff41b5710",
+            "ts": "2026-11-24T08:03:46.046Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L64"
+          },
+          {
+            "event_id": "EVT-321f5ddf20d5",
+            "ts": "2026-11-24T08:03:46.202Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L65"
+          },
+          {
+            "event_id": "EVT-09bed66127ca",
+            "ts": "2026-11-24T08:03:46.361Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L66"
+          },
+          {
+            "event_id": "EVT-0ed6f418a6c1",
+            "ts": "2026-11-24T08:03:46.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L67"
+          },
+          {
+            "event_id": "EVT-9289fdf0c8bb",
+            "ts": "2026-11-24T08:03:46.676Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L68"
+          },
+          {
+            "event_id": "EVT-cee6ec1008b7",
+            "ts": "2026-11-24T08:03:46.834Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L69"
+          },
+          {
+            "event_id": "EVT-2fb257cb5c9b",
+            "ts": "2026-11-24T08:03:46.993Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L70"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.1,
+      "source": "lab portal live event log (lab/state/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 2,
+      "tool": "search_logs",
+      "reason": "Step 2: check whether source IP 203.0.113.45 targeted other accounts or hosts in the alert window (spray vs single-account).",
+      "arguments": {
+        "src_ip": "203.0.113.45",
+        "start": "2026-11-24T08:03:37Z",
+        "end": "2026-11-24T08:03:47Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=61",
+      "result": {
+        "returned": 61,
+        "total_matched": 61,
+        "truncated": false,
+        "skipped_malformed_lines": 0,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 61
+          },
+          "by_src_ip": {
+            "203.0.113.45": 61
+          },
+          "by_account": {
+            "a.kumar@lab.example": 6,
+            "m.lee@lab.example": 6,
+            "j.doe@lab.example": 49
+          },
+          "first_ts": "2026-11-24T08:03:37.507Z",
+          "last_ts": "2026-11-24T08:03:46.993Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-97214311fb40",
+            "ts": "2026-11-24T08:03:37.507Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L10"
+          },
+          {
+            "event_id": "EVT-25a161747389",
+            "ts": "2026-11-24T08:03:37.664Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L11"
+          },
+          {
+            "event_id": "EVT-0c2c048542ba",
+            "ts": "2026-11-24T08:03:37.824Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L12"
+          },
+          {
+            "event_id": "EVT-fddc9c1a3670",
+            "ts": "2026-11-24T08:03:37.983Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L13"
+          },
+          {
+            "event_id": "EVT-90497d596c50",
+            "ts": "2026-11-24T08:03:38.139Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L14"
+          },
+          {
+            "event_id": "EVT-3c3e9b5b1156",
+            "ts": "2026-11-24T08:03:38.299Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L15"
+          },
+          {
+            "event_id": "EVT-23fede1d2302",
+            "ts": "2026-11-24T08:03:38.459Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L16"
+          },
+          {
+            "event_id": "EVT-e4a7b37db6bc",
+            "ts": "2026-11-24T08:03:38.619Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L17"
+          },
+          {
+            "event_id": "EVT-e5d67368a246",
+            "ts": "2026-11-24T08:03:38.779Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L18"
+          },
+          {
+            "event_id": "EVT-36e84fb36608",
+            "ts": "2026-11-24T08:03:38.933Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L19"
+          },
+          {
+            "event_id": "EVT-6fc4e7951410",
+            "ts": "2026-11-24T08:03:39.093Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L20"
+          },
+          {
+            "event_id": "EVT-14d72e73fb1b",
+            "ts": "2026-11-24T08:03:39.250Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L21"
+          },
+          {
+            "event_id": "EVT-e86adc9b8789",
+            "ts": "2026-11-24T08:03:39.407Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L22"
+          },
+          {
+            "event_id": "EVT-7a2b57e45281",
+            "ts": "2026-11-24T08:03:39.567Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L23"
+          },
+          {
+            "event_id": "EVT-d88ef1f073f3",
+            "ts": "2026-11-24T08:03:39.726Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L24"
+          },
+          {
+            "event_id": "EVT-39afff0ad73d",
+            "ts": "2026-11-24T08:03:39.884Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L25"
+          },
+          {
+            "event_id": "EVT-6625a621a220",
+            "ts": "2026-11-24T08:03:40.041Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L26"
+          },
+          {
+            "event_id": "EVT-ac884b50ed12",
+            "ts": "2026-11-24T08:03:40.201Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L27"
+          },
+          {
+            "event_id": "EVT-8ff7ba28dd8d",
+            "ts": "2026-11-24T08:03:40.360Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L28"
+          },
+          {
+            "event_id": "EVT-29f54ba8e4a1",
+            "ts": "2026-11-24T08:03:40.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L29"
+          },
+          {
+            "event_id": "EVT-2d37ae0d44f3",
+            "ts": "2026-11-24T08:03:40.675Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L30"
+          },
+          {
+            "event_id": "EVT-d27c42e0839a",
+            "ts": "2026-11-24T08:03:40.834Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L31"
+          },
+          {
+            "event_id": "EVT-15989e120780",
+            "ts": "2026-11-24T08:03:40.991Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L32"
+          },
+          {
+            "event_id": "EVT-71aa32eec399",
+            "ts": "2026-11-24T08:03:41.149Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L33"
+          },
+          {
+            "event_id": "EVT-c0cd61e4e3f7",
+            "ts": "2026-11-24T08:03:41.308Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L34"
+          },
+          {
+            "event_id": "EVT-11a0900bc463",
+            "ts": "2026-11-24T08:03:41.465Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L35"
+          },
+          {
+            "event_id": "EVT-c90d71fb5427",
+            "ts": "2026-11-24T08:03:41.624Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L36"
+          },
+          {
+            "event_id": "EVT-c386ec2ae1a3",
+            "ts": "2026-11-24T08:03:41.783Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L37"
+          },
+          {
+            "event_id": "EVT-f2fcd3ef665e",
+            "ts": "2026-11-24T08:03:41.938Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L38"
+          },
+          {
+            "event_id": "EVT-1559e63f0c59",
+            "ts": "2026-11-24T08:03:42.097Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L39"
+          },
+          {
+            "event_id": "EVT-4379e68e72ca",
+            "ts": "2026-11-24T08:03:42.257Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L40"
+          },
+          {
+            "event_id": "EVT-674c081bba62",
+            "ts": "2026-11-24T08:03:42.413Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L41"
+          },
+          {
+            "event_id": "EVT-cd2b9d0212e3",
+            "ts": "2026-11-24T08:03:42.568Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L42"
+          },
+          {
+            "event_id": "EVT-1648da94c7f2",
+            "ts": "2026-11-24T08:03:42.727Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L43"
+          },
+          {
+            "event_id": "EVT-7bffe2a29873",
+            "ts": "2026-11-24T08:03:42.886Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L44"
+          },
+          {
+            "event_id": "EVT-487777cb04ae",
+            "ts": "2026-11-24T08:03:43.045Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L45"
+          },
+          {
+            "event_id": "EVT-730b0856111d",
+            "ts": "2026-11-24T08:03:43.201Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L46"
+          },
+          {
+            "event_id": "EVT-4f00e1047121",
+            "ts": "2026-11-24T08:03:43.360Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L47"
+          },
+          {
+            "event_id": "EVT-6d36992a68b5",
+            "ts": "2026-11-24T08:03:43.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L48"
+          },
+          {
+            "event_id": "EVT-72e5e9b13dc8",
+            "ts": "2026-11-24T08:03:43.678Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L49"
+          },
+          {
+            "event_id": "EVT-7a7a37bef8ac",
+            "ts": "2026-11-24T08:03:43.837Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L50"
+          },
+          {
+            "event_id": "EVT-1f39094e723c",
+            "ts": "2026-11-24T08:03:43.996Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L51"
+          },
+          {
+            "event_id": "EVT-8fb1a3b9a6d9",
+            "ts": "2026-11-24T08:03:44.151Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L52"
+          },
+          {
+            "event_id": "EVT-78be75a88455",
+            "ts": "2026-11-24T08:03:44.311Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L53"
+          },
+          {
+            "event_id": "EVT-9e0d7b79cd5e",
+            "ts": "2026-11-24T08:03:44.467Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L54"
+          },
+          {
+            "event_id": "EVT-5328b68cbf46",
+            "ts": "2026-11-24T08:03:44.627Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L55"
+          },
+          {
+            "event_id": "EVT-a434443761ce",
+            "ts": "2026-11-24T08:03:44.786Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L56"
+          },
+          {
+            "event_id": "EVT-7555a7af0b16",
+            "ts": "2026-11-24T08:03:44.942Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L57"
+          },
+          {
+            "event_id": "EVT-4e2d79b4ca76",
+            "ts": "2026-11-24T08:03:45.099Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L58"
+          },
+          {
+            "event_id": "EVT-0b6385d923cb",
+            "ts": "2026-11-24T08:03:45.259Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L59"
+          },
+          {
+            "event_id": "EVT-c6caca6b1330",
+            "ts": "2026-11-24T08:03:45.416Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L60"
+          },
+          {
+            "event_id": "EVT-dcd863c501e5",
+            "ts": "2026-11-24T08:03:45.575Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L61"
+          },
+          {
+            "event_id": "EVT-ee370618ced3",
+            "ts": "2026-11-24T08:03:45.730Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L62"
+          },
+          {
+            "event_id": "EVT-6998aaca2804",
+            "ts": "2026-11-24T08:03:45.888Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L63"
+          },
+          {
+            "event_id": "EVT-a60ff41b5710",
+            "ts": "2026-11-24T08:03:46.046Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L64"
+          },
+          {
+            "event_id": "EVT-321f5ddf20d5",
+            "ts": "2026-11-24T08:03:46.202Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L65"
+          },
+          {
+            "event_id": "EVT-09bed66127ca",
+            "ts": "2026-11-24T08:03:46.361Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L66"
+          },
+          {
+            "event_id": "EVT-0ed6f418a6c1",
+            "ts": "2026-11-24T08:03:46.520Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L67"
+          },
+          {
+            "event_id": "EVT-9289fdf0c8bb",
+            "ts": "2026-11-24T08:03:46.676Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L68"
+          },
+          {
+            "event_id": "EVT-cee6ec1008b7",
+            "ts": "2026-11-24T08:03:46.834Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L69"
+          },
+          {
+            "event_id": "EVT-2fb257cb5c9b",
+            "ts": "2026-11-24T08:03:46.993Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L70"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.6,
+      "source": "lab portal live event log (lab/state/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 3,
+      "tool": "get_asset_context",
+      "reason": "Step 5: obtain account owner/role/privilege and MFA status plus host criticality to judge impact of the successful login.",
+      "arguments": {
+        "account": "j.doe@lab.example",
+        "host": "LAB-PORTAL-01"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "found=True",
+      "result": {
+        "found": true,
+        "host": {
+          "name": "LAB-PORTAL-01",
+          "found": true,
+          "role": "web portal and payables file share",
+          "department": "Finance",
+          "criticality": "high",
+          "owner": "it-ops@lab.example",
+          "software": [
+            "fastapi",
+            "uvicorn"
+          ]
+        },
+        "account": {
+          "name": "j.doe@lab.example",
+          "found": true,
+          "display_name": "J. Doe",
+          "department": "Finance",
+          "title": "AP Analyst",
+          "privileged": false,
+          "mfa_enrolled": false,
+          "usual_ips": [
+            "198.51.100.10",
+            "198.51.100.22"
+          ],
+          "usual_hours_utc": "03:30-12:30"
+        }
+      },
+      "duration_ms": 0.4,
+      "source": "lab asset inventory (lab/inventory.json)",
+      "mock": false
+    },
+    {
+      "seq": 4,
+      "tool": "lookup_ip",
+      "reason": "Step 6: characterise source IP 203.0.113.45 reputation/infrastructure, expecting a reserved documentation range result.",
+      "arguments": {
+        "ip": "203.0.113.45"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "found=False",
+      "result": {
+        "ip": "203.0.113.45",
+        "ip_class": "documentation range (RFC 5737)",
+        "found": false,
+        "intel_source": "not queried",
+        "note": "documentation range (RFC 5737): not routable on the internet, so no public reputation exists for it."
+      },
+      "duration_ms": 0.2,
+      "source": "AbuseIPDB / ipinfo.io (live public API)",
+      "mock": false
+    },
+    {
+      "seq": 5,
+      "tool": "search_cve",
+      "reason": "Step 7: map the observed failed-then-successful authentication pattern to official ATT&CK technique definitions.",
+      "arguments": {
+        "kind": "attack_technique",
+        "query": "brute force credentials authentication",
+        "limit": 5
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "count=5",
+      "result": {
+        "count": 5,
+        "snapshot_date": null,
+        "matches": [
+          {
+            "id": "T1556.002",
+            "kind": "attack_technique",
+            "name": "Password Filter DLL",
+            "tactic": "defense-impairment, persistence, credential-access",
+            "summary": "Adversaries may register malicious password filter dynamic link libraries (DLLs) into the authentication process to acquire user credentials as they are validated. \n\nWindows password filters are password policy enforcement mechanisms for both domain and local accounts. Filters are implemented as DLLs containing a method to validate potential passwords against password policies. Filter DLLs can be "
+          },
+          {
+            "id": "T1558.003",
+            "kind": "attack_technique",
+            "name": "Kerberoasting",
+            "tactic": "credential-access",
+            "summary": "Adversaries may abuse a valid Kerberos ticket-granting ticket (TGT) or sniff network traffic to obtain a ticket-granting service (TGS) ticket that may be vulnerable to [Brute Force](https://attack.mitre.org/techniques/T1110). \n\nService principal names (SPNs) are used to uniquely identify each instance of a Windows service. To enable authentication, Kerberos requires that SPNs be associated with at"
+          },
+          {
+            "id": "T1595.003",
+            "kind": "attack_technique",
+            "name": "Wordlist Scanning",
+            "tactic": "reconnaissance",
+            "summary": "Adversaries may iteratively probe infrastructure using brute-forcing and crawling techniques. While this technique employs similar methods to [Brute Force](https://attack.mitre.org/techniques/T1110), its goal is the identification of content and infrastructure rather than the discovery of valid credentials. Wordlists used in these scans may contain generic, commonly used names and file extensions "
+          },
+          {
+            "id": "T1003.005",
+            "kind": "attack_technique",
+            "name": "Cached Domain Credentials",
+            "tactic": "credential-access",
+            "summary": "Adversaries may attempt to access cached domain credentials used to allow authentication to occur in the event a domain controller is unavailable.\n\nOn Windows Vista and newer, the hash format is DCC2 (Domain Cached Credentials version 2) hash, also known as MS-Cache v2 hash. The number of default cached credentials varies and can be altered per system. This hash does not allow pass-the-hash style "
+          },
+          {
+            "id": "T1056.004",
+            "kind": "attack_technique",
+            "name": "Credential API Hooking",
+            "tactic": "collection, credential-access",
+            "summary": "Adversaries may hook into Windows application programming interface (API) functions and Linux system functions to collect user credentials. Malicious hooking mechanisms may capture API or function calls that include parameters that reveal user authentication credentials. Unlike [Keylogging](https://attack.mitre.org/techniques/T1056/001), this technique focuses specifically on API functions that in"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 4.4,
+      "source": "MITRE ATT&CK (lab/intel/attack_techniques.json) + NIST NVD (live API)",
+      "mock": false
+    },
+    {
+      "seq": 6,
+      "tool": "search_logs",
+      "reason": "Step 3: determine what the session did after the claimed 08:03:47Z success, including the success event itself, for 30 minutes.",
+      "arguments": {
+        "account": "j.doe@lab.example",
+        "end": "2026-11-24T08:33:47Z",
+        "host": "LAB-PORTAL-01",
+        "limit": 200,
+        "start": "2026-11-24T08:03:47Z"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=5",
+      "result": {
+        "returned": 5,
+        "total_matched": 5,
+        "truncated": false,
+        "skipped_malformed_lines": 0,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 1,
+            "auth_success": 1,
+            "mailbox_rule_created": 1,
+            "file_access": 1,
+            "logout": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 5
+          },
+          "by_account": {
+            "j.doe@lab.example": 5
+          },
+          "first_ts": "2026-11-24T08:03:47.149Z",
+          "last_ts": "2026-11-24T08:03:47.317Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-8144f3dac0d0",
+            "ts": "2026-11-24T08:03:47.149Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "reason": "bad_password"
+            },
+            "ref": "lab/state/events.jsonl#L71"
+          },
+          {
+            "event_id": "EVT-fae618fff495",
+            "ts": "2026-11-24T08:03:47.309Z",
+            "event_type": "auth_success",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "method": "password",
+              "mfa": "not_enrolled"
+            },
+            "ref": "lab/state/events.jsonl#L72"
+          },
+          {
+            "event_id": "EVT-b1794cbdfb87",
+            "ts": "2026-11-24T08:03:47.313Z",
+            "event_type": "mailbox_rule_created",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "rule_name": "invoice-sync",
+              "forward_to": "billing-sync@exfil-lab.example.net"
+            },
+            "ref": "lab/state/events.jsonl#L73"
+          },
+          {
+            "event_id": "EVT-c855a1ea4975",
+            "ts": "2026-11-24T08:03:47.316Z",
+            "event_type": "file_access",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1",
+              "share": "\\\\LAB-PORTAL-01\\payables",
+              "files_read": 14,
+              "bytes_read": 3351495
+            },
+            "ref": "lab/state/events.jsonl#L74"
+          },
+          {
+            "event_id": "EVT-2bb09a50e688",
+            "ts": "2026-11-24T08:03:47.317Z",
+            "event_type": "logout",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "user_agent": "python-httpx/0.28.1"
+            },
+            "ref": "lab/state/events.jsonl#L75"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 0.5,
+      "source": "lab portal live event log (lab/state/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 7,
+      "tool": "search_logs",
+      "reason": "Step 4: establish a 7-day pre-alert baseline for the account and whether 203.0.113.45 was previously seen.",
+      "arguments": {
+        "account": "j.doe@lab.example",
+        "end": "2026-11-24T08:03:37Z",
+        "limit": 200,
+        "start": "2026-11-17T08:03:37Z"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=2",
+      "result": {
+        "returned": 2,
+        "total_matched": 2,
+        "truncated": false,
+        "skipped_malformed_lines": 0,
+        "summary": {
+          "by_event_type": {
+            "auth_success": 1,
+            "logout": 1
+          },
+          "by_src_ip": {
+            "198.51.100.10": 2
+          },
+          "by_account": {
+            "j.doe@lab.example": 2
+          },
+          "first_ts": "2026-11-24T08:02:57.681Z",
+          "last_ts": "2026-11-24T08:02:57.683Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-5f13b4ded5d6",
+            "ts": "2026-11-24T08:02:57.681Z",
+            "event_type": "auth_success",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "198.51.100.10",
+            "details": {
+              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+              "method": "password",
+              "mfa": "not_enrolled"
+            },
+            "ref": "lab/state/events.jsonl#L1"
+          },
+          {
+            "event_id": "EVT-b6826f1d4fc4",
+            "ts": "2026-11-24T08:02:57.683Z",
+            "event_type": "logout",
+            "account": "j.doe@lab.example",
+            "host": "LAB-PORTAL-01",
+            "src_ip": "198.51.100.10",
+            "details": {
+              "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
+            },
+            "ref": "lab/state/events.jsonl#L2"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 0.3,
+      "source": "lab portal live event log (lab/state/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 8,
+      "tool": "search_cve",
+      "reason": "Step 7 follow-up: the keyword query returned unrelated techniques, so retrieve the brute force technique T1110 directly.",
+      "arguments": {
+        "id": "T1110",
+        "kind": "attack_technique"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "count=1",
+      "result": {
+        "count": 1,
+        "snapshot_date": null,
+        "matches": [
+          {
+            "id": "T1110",
+            "kind": "attack_technique",
+            "name": "Brute Force",
+            "tactic": "credential-access",
+            "summary": "Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained. Without knowledge of the password for an account or set of accounts, an adversary may systematically guess the password using a repetitive or iterative mechanism. Brute forcing passwords can take place via interaction with a service that will check the validity of "
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 6.3,
+      "source": "MITRE ATT&CK (lab/intel/attack_techniques.json) + NIST NVD (live API)",
+      "mock": false
+    }
+  ]
+}

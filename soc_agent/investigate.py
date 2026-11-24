@@ -4,6 +4,7 @@ import json
 from . import planner
 from .tools import TOOLSET, start_trace, stop_trace
 from .tools.specs import ALL_TOOLS
+from .skill import with_skill
 from .validation import ValidationError, validate
 
 EVIDENCE_PROMPT = f"""You are the evidence-gathering stage of a junior SOC analyst agent.
@@ -16,8 +17,8 @@ Rules:
 - Use only values from the alert, the plan, or earlier tool results. Never invent evidence.
 - Every tool result has `ok`. If ok is false, record the error code in tool_failures and continue
   with the other evidence; do not retry the same failing call more than once.
-- lookup_ip and search_cve return MOCK data: mark those findings mock=true and never present them as live intelligence.
-- Cite evidence: put event refs (e.g. data/logs/events.jsonl#L172) or record ids in `refs`.
+- Every tool result says `mock` and `source`. Copy `mock` into each finding; never present mock data as live intelligence.
+- Cite evidence: put event refs (e.g. lab/state/events.jsonl#L172) or record ids in `refs`.
 - Do not assign severity and do not recommend or take containment actions. That comes later.
 
 When you have enough evidence, reply with ONLY one JSON object, no markdown:
@@ -26,7 +27,7 @@ When you have enough evidence, reply with ONLY one JSON object, no markdown:
 """
 
 
-def parse_evidence(text: str, alert_id: str) -> dict:
+def parse_evidence(text: str, alert_id: str, mock_tools: set[str] | None = None) -> dict:
     cleaned = text.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
     start, end = cleaned.find("{"), cleaned.rfind("}")
     if start == -1 or end <= start:
@@ -39,7 +40,7 @@ def parse_evidence(text: str, alert_id: str) -> dict:
     if doc["alert_id"] != alert_id:
         raise ValidationError("evidence", [f"alert_id {doc['alert_id']!r} does not match {alert_id!r}"])
     for item in doc["evidence"]:
-        if item["tool"] in ("lookup_ip", "search_cve") and not item["mock"]:
+        if item["tool"] in (mock_tools if mock_tools is not None else {"lookup_ip", "search_cve"}) and not item["mock"]:
             raise ValidationError("evidence", [f"finding from {item['tool']} must be marked mock=true"])
     return doc
 
@@ -59,13 +60,13 @@ def gather_evidence(alert: dict, plan: dict, agent, audit, max_repairs: int = 2)
     rejection reasons (so gathered evidence is not lost), up to `max_repairs` times.
     """
     user = ("Alert:\n" + json.dumps(alert, indent=2) + "\n\nInvestigation plan:\n" + json.dumps(plan, indent=2))
-    audit.record("evidence_requested", system_prompt=EVIDENCE_PROMPT, user_prompt=user,
+    audit.record("evidence_requested", system_prompt=with_skill(EVIDENCE_PROMPT), user_prompt=user,
                  enabled_toolsets=[TOOLSET], tools=sorted(agent.valid_tool_names))
     trace = start_trace(audit)
     history = None
     try:
         for attempt in range(max_repairs + 1):
-            result = agent.run_conversation(user_message=user, system_message=EVIDENCE_PROMPT,
+            result = agent.run_conversation(user_message=user, system_message=with_skill(EVIDENCE_PROMPT),
                                             conversation_history=history)
             text = result.get("final_response") or ""
             audit.record("llm_response", stage="evidence", attempt=attempt, output=text,
@@ -73,7 +74,7 @@ def gather_evidence(alert: dict, plan: dict, agent, audit, max_repairs: int = 2)
             if result.get("failed"):
                 raise RuntimeError(f"Hermes run failed: {result.get('error')}")
             try:
-                report = parse_evidence(text, alert["alert_id"])
+                report = parse_evidence(text, alert["alert_id"], {c["tool"] for c in trace.calls if c["mock"]})
             except ValidationError as exc:
                 audit.record("evidence_rejected", attempt=attempt, problems=exc.problems)
                 if attempt == max_repairs:

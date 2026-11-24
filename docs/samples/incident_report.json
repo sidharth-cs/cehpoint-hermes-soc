@@ -1,0 +1,572 @@
+{
+  "report_id": "IR-ALR-2026-1001_20261124T082224Z_e87d76",
+  "generated_at": "2026-11-24T08:23:05.398+00:00",
+  "alert_id": "ALR-2026-1001",
+  "run_id": "ALR-2026-1001_20261124T082224Z_e87d76",
+  "orchestrator": "Hermes Agent (Nous Research) with DeepSeek; read-only `soc` toolset",
+  "data_provenance": "lab",
+  "summary": "An automated, scripted client at 203.0.113.45 guessed passwords for j.doe@lab.example, an account with no MFA. After 50 failures in roughly 8 seconds the 51st attempt succeeded (F1, F7, F8). The IP had never appeared for this account in the prior week (F2), and it also tried a.kumar@lab.example and m.lee@lab.example in the same window (F3), which fits a spray-shaped actor rather than a single-user typo. Within milliseconds of the login the session created a mailbox rule forwarding mail to an external address, read 14 files from the \\\\LAB-PORTAL-01\\payables share, and logged out (F4, F5, F6). That is textbook post-compromise collection and exfiltration staging on a high-criticality finance asset (F10). The speed and ordering of these actions — rule creation and bulk file read in under 10 ms, immediately after success — argues strongly against a human doing this unintentionally.",
+  "alert": {
+    "rule": {
+      "id": "AUTH-BRUTE-SUCCESS",
+      "name": "Repeated failed logins followed by success",
+      "description": "10+ failed logins for one account from one IP within 15 minutes, then a successful login for that account from the same IP."
+    },
+    "summary": "50 failed logins for j.doe@lab.example from 203.0.113.45 between 08:03:39 and 08:03:47 UTC, then a successful login from the same IP at 08:03:47 UTC.",
+    "entities": {
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "source_ips": [
+        "203.0.113.45"
+      ],
+      "domains": []
+    },
+    "created_at": "2026-11-24T08:04:40Z"
+  },
+  "severity": {
+    "level": "critical",
+    "reasons": [
+      "F1: brute force followed by a successful login (account access likely obtained)",
+      "F5: external mail-forwarding rule created after the login",
+      "F6 + F10: files read from a share using a high-criticality asset"
+    ]
+  },
+  "confidence": {
+    "level": "high",
+    "reasons": [
+      "all key facts were checked and every tool call succeeded"
+    ]
+  },
+  "model_severity_view": {
+    "level": "critical",
+    "agrees_with_rubric": true,
+    "explanation": "If true — and F1, F5 and F6 are confirmed, not inferred — an attacker obtained authenticated access to a finance account, established persistent external mail forwarding, and read a payables share on a high-criticality asset (F10). This matches the rubric's critical bar on all three counts: brute force plus success, external forwarding, and file access on a high-criticality host. The absence of public reputation for the source IP (F11) does not reduce severity, only our ability to attribute. I therefore agree with the rule-based critical rating and see no basis to downgrade."
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "status": "supported",
+      "fact_ids": [
+        "F1",
+        "F2",
+        "F7",
+        "F8",
+        "F5",
+        "F6",
+        "F4"
+      ],
+      "explanation": "Brute force succeeded: 50 failures then success from the same IP (F1), using a scripted python-httpx client (F7) against an account with no MFA (F8). The IP is new for this account over 7 days (F2). The session immediately created an external forwarding rule (F5), read 14 payables files (F6) and logged out (F4) — the actor held an authenticated session and used it."
+    },
+    {
+      "id": "H2",
+      "status": "refuted",
+      "fact_ids": [
+        "F7",
+        "F3",
+        "F5",
+        "F6",
+        "F2"
+      ],
+      "explanation": "A misconfigured client or mistyping user is implausible: the client is a scripted httpx library, not a mail app or browser (F7); the same IP also probed two other accounts (F3); and the 'correct' login was followed within milliseconds by an external forwarding rule and a bulk read of payables (F5, F6). The IP is also outside the account's usual IPs (F2/F9)."
+    },
+    {
+      "id": "H3",
+      "status": "supported",
+      "fact_ids": [
+        "F3",
+        "F1"
+      ],
+      "explanation": "The same IP attempted a.kumar@lab.example (6 failures) and m.lee@lab.example (6 failures) in the same window alongside the 50 attempts and success on j.doe@lab.example (F3, F1). Low per-account counts on the other two accounts combined with a heavy burst on one is consistent with spraying across a small account set before concentrating on one."
+    },
+    {
+      "id": "H4",
+      "status": "undetermined",
+      "fact_ids": [
+        "F1",
+        "F5",
+        "F6"
+      ],
+      "explanation": "This framing is partly borne out — the post-login behaviour (F5, F6) is indeed the most damaging signal — but the premise that the successes are legitimate is contradicted by F1: access was obtained by brute force from a new, scripted source. So 'legitimate login abused afterwards' does not hold; the account was compromised, not merely misused by its owner."
+    }
+  ],
+  "alternative_explanations": [
+    {
+      "explanation": "A security or QA scanner/pentest owned by the lab used a scripted client to test the portal and, as part of the test, wrote and cleaned up a forwarding rule and touched the payables share.",
+      "fact_ids": [
+        "F7",
+        "F5",
+        "F6",
+        "F2",
+        "F9"
+      ],
+      "why_less_likely": "A sanctioned test would normally come from an expected range and would be coordinated; this IP is outside the account's usual IPs (F2, F9), the rule forwards to an external domain (billing-sync@exfil-lab.example.net, F5), and 14 real payables files were read (F6). Nothing in the evidence indicates authorization."
+    },
+    {
+      "explanation": "A legitimate user travelling or on a new network fat-fingered their password repeatedly from a personal script and then set up forwarding for convenience before downloading payables files.",
+      "fact_ids": [
+        "F7",
+        "F3",
+        "F1"
+      ],
+      "why_less_likely": "The source is a scripted httpx client, not a mail or browser client (F7); the same IP hit two other named employees (F3); and a human cannot create a rule and read 14 files in the same second as the login (F1, F4). The login time is inside working hours (F9), which is the only point in its favour, and geolocation/known-IP checks still show the IP as unfamiliar."
+    }
+  ],
+  "unknowns": [
+    "Whether the mail-forwarding rule is still active and whether any mail has already been forwarded to billing-sync@exfil-lab.example.net (rule existence is confirmed, its ongoing effect is not).",
+    "Whether the 14 payables files were actually transmitted out or only read on the share — exfiltration destination is not evidenced in F6.",
+    "Whether a.kumar@lab.example and m.lee@lab.example were later targeted successfully outside the alert window (F3 only covers the window).",
+    "Whether other accounts besides the three named were targeted by 203.0.113.45 — the search appears scoped to this window and account set.",
+    "The content/sensitivity of the 14 payables files and whether that share holds regulated or financial data requiring notification.",
+    "The real-world identity of 203.0.113.45: it is an RFC 5737 documentation address, so no public reputation exists (F11) and geolocation/ownership cannot be established.",
+    "Whether any other accounts in the tenant lack MFA in the same way as j.doe@lab.example (only this account was checked)."
+  ],
+  "facts": [
+    {
+      "id": "F1",
+      "statement": "50 failed logins for j.doe@lab.example from 203.0.113.45, then a successful login from the same IP at 2026-11-24T08:03:47.309Z (0s after the last failure).",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L22",
+        "lab/state/events.jsonl#L71",
+        "lab/state/events.jsonl#L72"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F2",
+      "statement": "203.0.113.45 has no history for j.doe@lab.example in the searched look-back (2026-11-17 to 2026-11-24): the IP is new for this account.",
+      "status": "confirmed",
+      "refs": [],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F3",
+      "statement": "203.0.113.45 also targeted 2 other account(s) in the same window: a.kumar@lab.example (6 failed, 0 successful), m.lee@lab.example (6 failed, 0 successful).",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L10",
+        "lab/state/events.jsonl#L16"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F4",
+      "statement": "After the login, the same IP session performed: file_access, logout, mailbox_rule_created.",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L73",
+        "lab/state/events.jsonl#L74",
+        "lab/state/events.jsonl#L75"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F5",
+      "statement": "A mailbox rule forwarding mail to an external address (billing-sync@exfil-lab.example.net) was created at 2026-11-24T08:03:47.313Z.",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L73"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F6",
+      "statement": "Files were read from \\\\LAB-PORTAL-01\\payables (14 files, 3351495 bytes) at 2026-11-24T08:03:47.316Z.",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L74"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F7",
+      "statement": "Logins used a scripted client user agent (python-httpx/0.28.1), not a browser or mail app.",
+      "status": "confirmed",
+      "refs": [
+        "lab/state/events.jsonl#L22"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F8",
+      "statement": "j.doe@lab.example is not enrolled in MFA (a password alone was enough to log in).",
+      "status": "confirmed",
+      "refs": [
+        "lab/inventory.json#j.doe@lab.example"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F9",
+      "statement": "Login at 08:03 UTC is inside usual hours 03:30-12:30; 203.0.113.45 is not one of the account's usual IPs.",
+      "status": "confirmed",
+      "refs": [
+        "lab/inventory.json#j.doe@lab.example"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F10",
+      "statement": "LAB-PORTAL-01 is a high-criticality web portal and payables file share (Finance).",
+      "status": "confirmed",
+      "refs": [
+        "lab/inventory.json#LAB-PORTAL-01"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false
+    },
+    {
+      "id": "F11",
+      "statement": "203.0.113.45 is a documentation range (RFC 5737) address: no public reputation exists, so none was used.",
+      "status": "not_observed",
+      "refs": [
+        "lookup_ip#203.0.113.45"
+      ],
+      "tools": [
+        "lookup_ip"
+      ],
+      "mock": false
+    }
+  ],
+  "attack_mapping": [
+    {
+      "technique": "T1110.001",
+      "name": "Brute Force: Password Guessing",
+      "fact_ids": [
+        "F1"
+      ]
+    },
+    {
+      "technique": "T1110.003",
+      "name": "Brute Force: Password Spraying",
+      "fact_ids": [
+        "F3"
+      ]
+    },
+    {
+      "technique": "T1078",
+      "name": "Valid Accounts",
+      "fact_ids": [
+        "F1"
+      ]
+    },
+    {
+      "technique": "T1114.003",
+      "name": "Email Collection: Email Forwarding Rule",
+      "fact_ids": [
+        "F5"
+      ]
+    },
+    {
+      "technique": "T1039",
+      "name": "Data from Network Shared Drive",
+      "fact_ids": [
+        "F6"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "start": "2026-11-24T08:02:57.681Z",
+      "end": "2026-11-24T08:02:57.681Z",
+      "count": 1,
+      "event_type": "auth_success",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "198.51.100.10",
+      "details": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+        "method": "password",
+        "mfa": "not_enrolled"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L1"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:02:57.683Z",
+      "end": "2026-11-24T08:02:57.683Z",
+      "count": 1,
+      "event_type": "logout",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "198.51.100.10",
+      "details": {
+        "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L2"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:37.507Z",
+      "end": "2026-11-24T08:03:38.299Z",
+      "count": 6,
+      "event_type": "auth_failure",
+      "account": "a.kumar@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "reason": "bad_password"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L10",
+        "lab/state/events.jsonl#L15"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:38.459Z",
+      "end": "2026-11-24T08:03:39.250Z",
+      "count": 6,
+      "event_type": "auth_failure",
+      "account": "m.lee@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "reason": "bad_password"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L16",
+        "lab/state/events.jsonl#L21"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:39.407Z",
+      "end": "2026-11-24T08:03:47.149Z",
+      "count": 50,
+      "event_type": "auth_failure",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "reason": "bad_password"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L22",
+        "lab/state/events.jsonl#L71"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:47.309Z",
+      "end": "2026-11-24T08:03:47.309Z",
+      "count": 1,
+      "event_type": "auth_success",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "method": "password",
+        "mfa": "not_enrolled"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L72"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:47.313Z",
+      "end": "2026-11-24T08:03:47.313Z",
+      "count": 1,
+      "event_type": "mailbox_rule_created",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "rule_name": "invoice-sync",
+        "forward_to": "billing-sync@exfil-lab.example.net"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L73"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:47.316Z",
+      "end": "2026-11-24T08:03:47.316Z",
+      "count": 1,
+      "event_type": "file_access",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1",
+        "share": "\\\\LAB-PORTAL-01\\payables",
+        "files_read": 14,
+        "bytes_read": 3351495
+      },
+      "refs": [
+        "lab/state/events.jsonl#L74"
+      ]
+    },
+    {
+      "start": "2026-11-24T08:03:47.317Z",
+      "end": "2026-11-24T08:03:47.317Z",
+      "count": 1,
+      "event_type": "logout",
+      "account": "j.doe@lab.example",
+      "host": "LAB-PORTAL-01",
+      "src_ip": "203.0.113.45",
+      "details": {
+        "user_agent": "python-httpx/0.28.1"
+      },
+      "refs": [
+        "lab/state/events.jsonl#L75"
+      ]
+    }
+  ],
+  "response_actions": [
+    {
+      "action_id": "A1",
+      "action": "block_ip",
+      "target": "203.0.113.45",
+      "fact_ids": [
+        "F1",
+        "F3",
+        "F7"
+      ],
+      "justification": "Confirmed brute force followed by a successful login from this exact IP (F1), using a scripted client (F7), and the same IP also attempted two other accounts (F3). Blocking the alert source IP stops further attempts against the other accounts and any reuse of the session from this endpoint.",
+      "requested_by": "hermes-agent",
+      "requested_at": "2026-11-24T08:23:05.397+00:00",
+      "status": "pending_approval",
+      "target_system": "lab portal LAB-PORTAL-01 (lab/app.py)",
+      "digest": "5db43441766c555b0498d188fed9a8d238358311b98ccf262bdc93439f5e77f4"
+    },
+    {
+      "action_id": "A2",
+      "action": "disable_account",
+      "target": "j.doe@lab.example",
+      "fact_ids": [
+        "F1",
+        "F5",
+        "F6",
+        "F8"
+      ],
+      "justification": "The account was compromised by brute force with no MFA (F1, F8) and the attacker session used it to create external forwarding (F5) and read payables files (F6). Disabling the account cuts off further use of the stolen session and is required before the forwarding rule and credential can be safely remediated.",
+      "requested_by": "hermes-agent",
+      "requested_at": "2026-11-24T08:23:05.397+00:00",
+      "status": "pending_approval",
+      "target_system": "lab portal LAB-PORTAL-01 (lab/app.py)",
+      "digest": "4c64a4b3c1566ee5714645fef4f0047fc0b903ecf8e4ad7a65e5bbbb71623dd7"
+    }
+  ],
+  "tool_calls": [
+    {
+      "seq": 1,
+      "tool": "search_logs",
+      "reason": "Step 1: confirm the failed-login count, timestamps, and the successful login in raw events for the alert account and host in the alert window.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 1.1
+    },
+    {
+      "seq": 2,
+      "tool": "search_logs",
+      "reason": "Step 2: check whether source IP 203.0.113.45 targeted other accounts or hosts in the alert window (spray vs single-account).",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 1.6
+    },
+    {
+      "seq": 3,
+      "tool": "get_asset_context",
+      "reason": "Step 5: obtain account owner/role/privilege and MFA status plus host criticality to judge impact of the successful login.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 0.4
+    },
+    {
+      "seq": 4,
+      "tool": "lookup_ip",
+      "reason": "Step 6: characterise source IP 203.0.113.45 reputation/infrastructure, expecting a reserved documentation range result.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 0.2
+    },
+    {
+      "seq": 5,
+      "tool": "search_cve",
+      "reason": "Step 7: map the observed failed-then-successful authentication pattern to official ATT&CK technique definitions.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 4.4
+    },
+    {
+      "seq": 6,
+      "tool": "search_logs",
+      "reason": "Step 3: determine what the session did after the claimed 08:03:47Z success, including the success event itself, for 30 minutes.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 0.5
+    },
+    {
+      "seq": 7,
+      "tool": "search_logs",
+      "reason": "Step 4: establish a 7-day pre-alert baseline for the account and whether 203.0.113.45 was previously seen.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 0.3
+    },
+    {
+      "seq": 8,
+      "tool": "search_cve",
+      "reason": "Step 7 follow-up: the keyword query returned unrelated techniques, so retrieve the brute force technique T1110 directly.",
+      "ok": true,
+      "mock": false,
+      "error": null,
+      "duration_ms": 6.3
+    }
+  ],
+  "artifacts": {
+    "audit_log": "audit.jsonl",
+    "tool_trace": "tool_trace.json",
+    "timeline": "timeline.json",
+    "evidence": "evidence.json",
+    "investigation": "investigation.json",
+    "approvals": "approvals.json"
+  },
+  "limitations": [
+    "The monitored system is a lab portal we own; client IPs are RFC 5737 documentation addresses sent via X-Forwarded-For.",
+    "Documentation-range IPs have no public reputation, so IP intel adds context only for public IPs.",
+    "Response actions change only the lab portal, and only after a named analyst approves them.",
+    "Facts are computed by fixed rules; behaviour outside those rules is reported as unknown, not inferred."
+  ]
+}

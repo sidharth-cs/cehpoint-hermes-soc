@@ -2,14 +2,15 @@
 import json
 import re
 
+from .skill import load as _load_skill, with_skill
 from .validation import ValidationError, validate
 
 # Tools the agent will be allowed to call from Day 2. On Day 1 they are only named
 # in the plan; Hermes has no tools enabled and cannot execute anything.
 PLANNED_TOOLS = {
-    "search_logs": "Query the synthetic authentication/host log store by account, host, IP and time window.",
-    "lookup_ip": "Reputation and context for an IP from a local MOCK intel file (clearly labelled as mock).",
-    "search_cve": "Look up CVE / threat-intel entries from a local snapshot.",
+    "search_logs": "Query the lab portal event log by account, host, IP and time window.",
+    "lookup_ip": "Reputation and context for an IP from a live public intel API (reserved ranges are not queried).",
+    "search_cve": "Look up MITRE ATT&CK techniques (official data) and CVEs (live NVD API).",
     "get_asset_context": "Owner, criticality and role of a host or account from the asset inventory.",
     "none": "A reasoning step that needs no tool (e.g. correlate results already gathered).",
 }
@@ -81,9 +82,9 @@ def parse_plan(text: str, alert_id: str) -> dict:
 def make_plan(alert: dict, llm, audit, max_repairs: int = 1) -> dict:
     """Ask the LLM (through Hermes) for a plan; on a schema failure, send the errors back once."""
     user = build_user_prompt(alert)
-    audit.record("plan_requested", system_prompt=SYSTEM_PROMPT, user_prompt=user)
+    audit.record("plan_requested", system_prompt=with_skill(SYSTEM_PROMPT), user_prompt=user, skill={k: v for k, v in _load_skill().items() if k != "body"})
     for attempt in range(max_repairs + 1):
-        text, meta = llm(SYSTEM_PROMPT, user)
+        text, meta = llm(with_skill(SYSTEM_PROMPT), user)
         audit.record("llm_response", attempt=attempt, meta=meta, output=text)
         try:
             plan = parse_plan(text, alert["alert_id"])

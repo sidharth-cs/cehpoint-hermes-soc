@@ -1,0 +1,17 @@
+{
+  "_meta": {"description": "Asset inventory of the lab system we own (lab/app.py). Configuration, not mock data."},
+  "hosts": {
+    "LAB-PORTAL-01": {"role": "web portal and payables file share", "department": "Finance", "criticality": "high",
+                       "owner": "it-ops@lab.example", "software": ["fastapi", "uvicorn"]}
+  },
+  "accounts": {
+    "j.doe@lab.example":   {"display_name": "J. Doe", "department": "Finance", "title": "AP Analyst", "privileged": false,
+                            "mfa_enrolled": false, "usual_ips": ["198.51.100.10", "198.51.100.22"], "usual_hours_utc": "03:30-12:30"},
+    "a.kumar@lab.example": {"display_name": "A. Kumar", "department": "Finance", "title": "Treasury Analyst", "privileged": false,
+                            "mfa_enrolled": true, "usual_ips": ["198.51.100.10", "198.51.100.22"], "usual_hours_utc": "03:30-12:30"},
+    "m.lee@lab.example":   {"display_name": "M. Lee", "department": "HR", "title": "HR Generalist", "privileged": false,
+                            "mfa_enrolled": true, "usual_ips": ["198.51.100.10"], "usual_hours_utc": "03:30-12:30"},
+    "s.rao@lab.example":   {"display_name": "S. Rao", "department": "Engineering", "title": "Platform Admin", "privileged": true,
+                            "mfa_enrolled": true, "usual_ips": ["198.51.100.10"], "usual_hours_utc": "03:30-14:00"}
+  }
+}

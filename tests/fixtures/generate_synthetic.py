@@ -1,6 +1,6 @@
 """Generate the synthetic datasets used by the tools. Deterministic: same seed -> identical files.
 
-    python data/generate_synthetic.py
+    python tests/fixtures/generate_synthetic.py
 
 Everything here is invented. IPs come from RFC 5737 documentation ranges (192.0.2.0/24,
 198.51.100.0/24, 203.0.113.0/24), domains are RFC 2606 example.com, users and hosts are made up.
@@ -83,7 +83,7 @@ def main() -> None:
     lines = [json.dumps(e, sort_keys=True) for e in events]
     # One deliberately corrupted line (truncated write) so the tools must handle malformed data.
     lines.insert(len(lines) // 3, '{"ts": "2026-11-12T04:01:07Z", "event_type": "auth_succ')
-    (OUT / "logs" / "events.jsonl").write_text("\n".join(lines) + "\n")
+    (OUT / "events.jsonl").write_text("\n".join(lines) + "\n")
 
     intel = {
         "_meta": {"source": "MOCK", "note": "Synthetic IP reputation for testing. Not live threat intelligence."},
@@ -97,7 +97,7 @@ def main() -> None:
         "192.0.2.77": {"verdict": "suspicious", "score": 55, "tags": ["scanner"], "asn": "AS64502 (documentation ASN)",
                        "country": "ZZ", "first_seen": "2026-09-01", "last_seen": "2026-11-20", "reports": 4},
     }
-    (OUT / "intel" / "ip_reputation_mock.json").write_text(json.dumps(intel, indent=2, sort_keys=True) + "\n")
+    (OUT / "ip_intel.json").write_text(json.dumps(intel, indent=2, sort_keys=True) + "\n")
 
     assets = {
         "_meta": {"source": "synthetic-cmdb", "note": "Synthetic asset inventory."},
@@ -126,7 +126,7 @@ def main() -> None:
                                   "usual_ips": [OFFICE_IP, VPN_IP], "usual_hours_utc": "03:30-12:30"},
         },
     }
-    (OUT / "assets" / "inventory.json").write_text(json.dumps(assets, indent=2, sort_keys=True) + "\n")
+    (OUT / "inventory.json").write_text(json.dumps(assets, indent=2, sort_keys=True) + "\n")
     print(f"wrote {len(events)} events (+1 malformed line), {len(intel) - 1} IP records, {len(assets['hosts'])} hosts")
 
 

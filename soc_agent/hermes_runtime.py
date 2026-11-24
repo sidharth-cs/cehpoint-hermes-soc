@@ -29,6 +29,8 @@ def load_dotenv(path: Path = ROOT / ".env") -> None:
 def isolate_hermes_home() -> Path:
     HERMES_HOME.mkdir(exist_ok=True)
     os.environ["HERMES_HOME"] = str(HERMES_HOME)
+    from .skill import install
+    install(HERMES_HOME)  # Hermes' skill index sees the packaged skill; the agent gets no skills toolset
     return HERMES_HOME
 
 

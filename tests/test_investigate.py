@@ -11,7 +11,7 @@ from soc_agent.validation import ValidationError
 
 def evidence(**over):
     doc = {"alert_id": "ALR-2026-0001",
-           "evidence": [{"tool": "search_logs", "finding": "50 failures then 1 success", "refs": ["data/logs/events.jsonl#L172"], "mock": False},
+           "evidence": [{"tool": "search_logs", "finding": "50 failures then 1 success", "refs": ["tests/fixtures/events.jsonl#L172"], "mock": False},
                         {"tool": "lookup_ip", "finding": "MOCK: malicious", "refs": [], "mock": True}],
            "tool_failures": [], "open_questions": []}
     doc.update(over)
@@ -48,9 +48,9 @@ def test_synthetic_data_is_reproducible(tmp_path):
     import shutil
     from pathlib import Path
     root = Path(__file__).resolve().parent.parent
-    before = {p: p.read_bytes() for p in (root / "data").rglob("*.json*")}
-    subprocess.run([sys.executable, str(root / "data" / "generate_synthetic.py")], check=True, capture_output=True)
-    after = {p: p.read_bytes() for p in (root / "data").rglob("*.json*")}
+    before = {p: p.read_bytes() for p in (root / "tests" / "fixtures").glob("*.json*")}
+    subprocess.run([sys.executable, str(root / "tests" / "fixtures" / "generate_synthetic.py")], check=True, capture_output=True)
+    after = {p: p.read_bytes() for p in (root / "tests" / "fixtures").glob("*.json*")}
     assert before == after
 
 

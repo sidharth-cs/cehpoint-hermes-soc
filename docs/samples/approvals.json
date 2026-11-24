@@ -1,0 +1,38 @@
+{
+  "run_id": "ALR-2026-1001_20261124T082224Z_e87d76",
+  "requests": [
+    {
+      "action_id": "A1",
+      "action": "block_ip",
+      "target": "203.0.113.45",
+      "fact_ids": [
+        "F1",
+        "F3",
+        "F7"
+      ],
+      "justification": "Confirmed brute force followed by a successful login from this exact IP (F1), using a scripted client (F7), and the same IP also attempted two other accounts (F3). Blocking the alert source IP stops further attempts against the other accounts and any reuse of the session from this endpoint.",
+      "requested_by": "hermes-agent",
+      "requested_at": "2026-11-24T08:23:05.397+00:00",
+      "status": "pending_approval",
+      "target_system": "lab portal LAB-PORTAL-01 (lab/app.py)",
+      "digest": "5db43441766c555b0498d188fed9a8d238358311b98ccf262bdc93439f5e77f4"
+    },
+    {
+      "action_id": "A2",
+      "action": "disable_account",
+      "target": "j.doe@lab.example",
+      "fact_ids": [
+        "F1",
+        "F5",
+        "F6",
+        "F8"
+      ],
+      "justification": "The account was compromised by brute force with no MFA (F1, F8) and the attacker session used it to create external forwarding (F5) and read payables files (F6). Disabling the account cuts off further use of the stolen session and is required before the forwarding rule and credential can be safely remediated.",
+      "requested_by": "hermes-agent",
+      "requested_at": "2026-11-24T08:23:05.397+00:00",
+      "status": "pending_approval",
+      "target_system": "lab portal LAB-PORTAL-01 (lab/app.py)",
+      "digest": "4c64a4b3c1566ee5714645fef4f0047fc0b903ecf8e4ad7a65e5bbbb71623dd7"
+    }
+  ]
+}
