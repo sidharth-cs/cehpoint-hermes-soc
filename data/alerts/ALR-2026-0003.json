@@ -1,0 +1,13 @@
+{
+  "alert_id": "ALR-2026-0003",
+  "created_at": "2026-11-11T04:08:30Z",
+  "source": "synthetic-siem",
+  "rule": {"id": "AUTH-FAIL-THEN-SUCCESS", "name": "Failed login followed by success (privileged account)",
+           "description": "Any failed login followed by a successful login on a privileged account within 5 minutes."},
+  "severity_hint": "low",
+  "entities": {"account": "s.rao@example.com", "host": "WS-ENG-021", "source_ips": ["198.51.100.10"], "domains": []},
+  "observations": {"failed_logins": 1, "successful_logins": 1,
+                   "window_start": "2026-11-11T04:07:54Z", "window_end": "2026-11-11T04:08:14Z"},
+  "summary": "One failed login then a successful login for privileged account s.rao@example.com from 198.51.100.10 within 20 seconds.",
+  "data_provenance": "synthetic"
+}

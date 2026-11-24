@@ -1,0 +1,379 @@
+{
+  "alert_id": "ALR-2026-0001",
+  "facts": [
+    {
+      "id": "F1",
+      "statement": "50 failed logins for j.doe@example.com from 203.0.113.45, then a successful login from the same IP at 2026-11-23T03:13:51Z (15s after the last failure).",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L172",
+        "data/logs/events.jsonl#L241",
+        "data/logs/events.jsonl#L242"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {
+        "failures": 50,
+        "success_ts": "2026-11-23T03:13:51Z",
+        "first_failure_ts": "2026-11-23T02:58:05Z"
+      }
+    },
+    {
+      "id": "F2",
+      "statement": "203.0.113.45 has no history for j.doe@example.com in the searched look-back (2026-10-24 to 2026-11-23): the IP is new for this account.",
+      "status": "confirmed",
+      "refs": [],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {
+        "lookback_from": "2026-10-24T03:14:22+00:00"
+      }
+    },
+    {
+      "id": "F3",
+      "statement": "203.0.113.45 also targeted 2 other account(s) in the same window: a.kumar@example.com (12 failed, 0 successful), m.lee@example.com (8 failed, 0 successful).",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L176",
+        "data/logs/events.jsonl#L177"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {
+        "accounts": {
+          "m.lee@example.com": {
+            "failures": 8,
+            "successes": 0,
+            "refs": [
+              "data/logs/events.jsonl#L176",
+              "data/logs/events.jsonl#L182",
+              "data/logs/events.jsonl#L187",
+              "data/logs/events.jsonl#L194",
+              "data/logs/events.jsonl#L200",
+              "data/logs/events.jsonl#L205",
+              "data/logs/events.jsonl#L211",
+              "data/logs/events.jsonl#L217"
+            ]
+          },
+          "a.kumar@example.com": {
+            "failures": 12,
+            "successes": 0,
+            "refs": [
+              "data/logs/events.jsonl#L177",
+              "data/logs/events.jsonl#L183",
+              "data/logs/events.jsonl#L188",
+              "data/logs/events.jsonl#L193",
+              "data/logs/events.jsonl#L198",
+              "data/logs/events.jsonl#L204",
+              "data/logs/events.jsonl#L210",
+              "data/logs/events.jsonl#L216",
+              "data/logs/events.jsonl#L221",
+              "data/logs/events.jsonl#L226",
+              "data/logs/events.jsonl#L231",
+              "data/logs/events.jsonl#L235"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "F4",
+      "statement": "After the login, the same IP session performed: file_access, logout, mailbox_rule_created.",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L243",
+        "data/logs/events.jsonl#L244",
+        "data/logs/events.jsonl#L245"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {
+        "event_types": [
+          "file_access",
+          "logout",
+          "mailbox_rule_created"
+        ]
+      }
+    },
+    {
+      "id": "F5",
+      "statement": "A mailbox rule forwarding mail to an external address (ext.billing-update@example.org) was created at 2026-11-23T03:17:03Z.",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L243"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {}
+    },
+    {
+      "id": "F6",
+      "statement": "Files were read from \\\\fs-fin-01\\payables (14 files, 8421377 bytes) at 2026-11-23T03:21:31Z.",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L244"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {
+        "bytes_read": 8421377,
+        "files_read": 14,
+        "share": "\\\\fs-fin-01\\payables"
+      }
+    },
+    {
+      "id": "F7",
+      "statement": "Logins used a scripted client user agent (python-requests/2.31), not a browser or mail app.",
+      "status": "confirmed",
+      "refs": [
+        "data/logs/events.jsonl#L172"
+      ],
+      "tools": [
+        "search_logs"
+      ],
+      "mock": false,
+      "data": {}
+    },
+    {
+      "id": "F8",
+      "statement": "j.doe@example.com is not enrolled in MFA (a password alone was enough to log in).",
+      "status": "confirmed",
+      "refs": [
+        "data/assets/inventory.json#j.doe@example.com"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false,
+      "data": {
+        "mfa_enrolled": false,
+        "privileged": false
+      }
+    },
+    {
+      "id": "F9",
+      "statement": "Login at 03:13 UTC is outside usual hours 03:30-12:30; 203.0.113.45 is not one of the account's usual IPs.",
+      "status": "confirmed",
+      "refs": [
+        "data/assets/inventory.json#j.doe@example.com"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false,
+      "data": {
+        "off_hours": true,
+        "usual_ip": false
+      }
+    },
+    {
+      "id": "F10",
+      "statement": "WS-FIN-014 is a high-criticality Accounts payable workstation (Finance).",
+      "status": "confirmed",
+      "refs": [
+        "data/assets/inventory.json#WS-FIN-014"
+      ],
+      "tools": [
+        "get_asset_context"
+      ],
+      "mock": false,
+      "data": {
+        "criticality": "high"
+      }
+    },
+    {
+      "id": "F11",
+      "statement": "MOCK intel rates 203.0.113.45 as malicious (score 87, tags credential-stuffing, password-spray).",
+      "status": "confirmed",
+      "refs": [
+        "data/intel/ip_reputation_mock.json#203.0.113.45"
+      ],
+      "tools": [
+        "lookup_ip"
+      ],
+      "mock": true,
+      "data": {
+        "verdict": "malicious",
+        "score": 87
+      }
+    }
+  ],
+  "attack_mapping": [
+    {
+      "technique": "T1110.001",
+      "name": "Brute Force: Password Guessing",
+      "fact_ids": [
+        "F1"
+      ],
+      "in_intel_snapshot": true,
+      "justification": "50 failed logins for j.doe@example.com from 203.0.113.45, then a successful login from the same IP at 2026-11-23T03:13:51Z (15s after the last failure)."
+    },
+    {
+      "technique": "T1110.003",
+      "name": "Brute Force: Password Spraying",
+      "fact_ids": [
+        "F3"
+      ],
+      "in_intel_snapshot": true,
+      "justification": "203.0.113.45 also targeted 2 other account(s) in the same window: a.kumar@example.com (12 failed, 0 successful), m.lee@example.com (8 failed, 0 successful)."
+    },
+    {
+      "technique": "T1078",
+      "name": "Valid Accounts",
+      "fact_ids": [
+        "F1"
+      ],
+      "in_intel_snapshot": false,
+      "justification": "50 failed logins for j.doe@example.com from 203.0.113.45, then a successful login from the same IP at 2026-11-23T03:13:51Z (15s after the last failure)."
+    },
+    {
+      "technique": "T1114.003",
+      "name": "Email Collection: Email Forwarding Rule",
+      "fact_ids": [
+        "F5"
+      ],
+      "in_intel_snapshot": false,
+      "justification": "A mailbox rule forwarding mail to an external address (ext.billing-update@example.org) was created at 2026-11-23T03:17:03Z."
+    },
+    {
+      "technique": "T1039",
+      "name": "Data from Network Shared Drive",
+      "fact_ids": [
+        "F6"
+      ],
+      "in_intel_snapshot": false,
+      "justification": "Files were read from \\\\fs-fin-01\\payables (14 files, 8421377 bytes) at 2026-11-23T03:21:31Z."
+    }
+  ],
+  "severity": {
+    "level": "critical",
+    "reasons": [
+      "F1: brute force followed by a successful login (account access likely obtained)",
+      "F5: external mail-forwarding rule created after the login",
+      "F6 + F10: files read from a share using a high-criticality asset"
+    ]
+  },
+  "confidence": {
+    "level": "high",
+    "reasons": [
+      "all key facts were checked and every tool call succeeded",
+      "F11 comes from MOCK intel; it supports the conclusion but is not relied on alone"
+    ]
+  },
+  "assessment": {
+    "alert_id": "ALR-2026-0001",
+    "what_likely_happened": "An external actor at 203.0.113.45 ran an automated password-guessing/spray campaign against example.com accounts, including j.doe@example.com, and succeeded on the first target after 50 failures in ~15 minutes (F1, F3, F7). The account had no MFA, so the password alone yielded a session (F8). The same session then acted like a hands-on intruder: it created an external mail-forwarding rule to ext.billing-update@example.org and read 14 files (approx. 8.4 MB) from the \\\\fs-fin-01\\payables share on a high-criticality Accounts Payable workstation (F4, F5, F6, F10). The login was 15s after the last failure, from an IP never before seen for this account, using a python-requests client rather than a browser or mail app, and outside the account's usual hours (F1, F2, F7, F9). This pattern is consistent with successful brute force/password spraying leading to credential misuse, email collection via forwarding rule, and staging of financial data — i.e., likely business email compromise plus data theft from Finance.",
+    "hypotheses": [
+      {
+        "id": "H1",
+        "status": "supported",
+        "fact_ids": [
+          "F1",
+          "F2",
+          "F3",
+          "F7",
+          "F8",
+          "F9",
+          "F4",
+          "F5",
+          "F6"
+        ],
+        "explanation": "50 failures followed 15 seconds later by success from the same IP (F1), with an IP never seen for this account (F2), a scripted python-requests client (F7), no MFA enrolled so password alone sufficed (F8), and an out-of-hours login from a non-usual IP (F9). Post-login actions — external mail-forwarding rule and reading 14 payables files (F4, F5, F6) — are inconsistent with a normal interactive user session and consistent with hands-on use of a guessed credential."
+      },
+      {
+        "id": "H2",
+        "status": "refuted",
+        "fact_ids": [
+          "F7",
+          "F3",
+          "F5",
+          "F6",
+          "F2"
+        ],
+        "explanation": "A legitimate user mistyping a password would use a browser or mail client, not python-requests/2.31 (F7), and would not generate 50 failures across a 15-minute window while also hitting two other accounts (F3). A real user would not create a forwarding rule to an external billing-looking address and bulk-read payables share files immediately after logging in (F5, F6), and the IP is entirely new to this account (F2)."
+      },
+      {
+        "id": "H3",
+        "status": "undetermined",
+        "fact_ids": [
+          "F1",
+          "F3",
+          "F7",
+          "F8",
+          "F5"
+        ],
+        "explanation": "Nothing in the facts positively establishes insider or delegated activity versus external attack — attribution is a gap. However, the same IP also sprayed two other accounts (F3), a scripted client was used (F7), and the failure-then-success sequence at 15s (F1) fits automation, which weakens a stale-password/retry-loop explanation. The facts do not, by themselves, disprove insider involvement."
+      },
+      {
+        "id": "H4",
+        "status": "supported",
+        "fact_ids": [
+          "F3",
+          "F1",
+          "F7"
+        ],
+        "explanation": "The same source IP attempted 12 logins on a.kumar@example.com and 8 on m.lee@example.com in the same window with no success (F3), while succeeding only on j.doe after 50 attempts (F1) using an automated client (F7) — the classic spray/credential-stuffing pattern where one account is the confirmed success."
+      },
+      {
+        "id": "H5",
+        "status": "supported",
+        "fact_ids": [
+          "F4",
+          "F5",
+          "F6",
+          "F10"
+        ],
+        "explanation": "Post-login activity is already malicious in nature: an external mail-forwarding rule (F5) — a persistence/collection mechanism — plus reads of 14 files from a payables share (F6) on a high-criticality Finance workstation (F10), preceded by file_access and logout events from the same session (F4). Further lateral movement or persistence beyond these facts is not evidenced and remains an unknown."
+      }
+    ],
+    "alternative_explanations": [
+      {
+        "explanation": "A security test, pen-test, or automated integration/credential-rotation script owned by Finance IT that legitimately uses python-requests and touched a payables share.",
+        "fact_ids": [
+          "F3",
+          "F7",
+          "F5",
+          "F2",
+          "F9"
+        ],
+        "why_less_likely": "The source IP also failed logins against two unrelated accounts (F3), created a forwarding rule to an external non-corporate-looking domain (F5), and is new to the account and outside the user's normal hours/IPs (F2, F9) — sanctioned testing would normally be allow-listed and coordinated with the affected account holders."
+      },
+      {
+        "explanation": "A compromised or malicious on-host tool shared by a third party (e.g., a vendor script running on the workstation) minting sessions for the finance user.",
+        "fact_ids": [
+          "F7",
+          "F2",
+          "F1"
+        ],
+        "why_less_likely": "The 50-failure burst then success 15 seconds later from a single external IP never seen before for the account (F1, F2) with an unenrolled-MFA login (F8) is more characteristic of an external guessing campaign than local tooling, and the external forwarding destination (F5) points outward."
+      }
+    ],
+    "unknowns": [
+      "Whether other accounts beyond a.kumar and m.lee were targeted or compromised by 203.0.113.45 — failed/success counts were only reported for three accounts.",
+      "What the 14 payables files contain and whether data actually left the network after the mailbox rule was created (exfiltration not observed in the facts).",
+      "Whether the external forwarding address ext.billing-update@example.org received any mail and whether it is a known attacker mailbox or related infrastructure.",
+      "Whether the attacker performed further actions beyond file_access, logout, and mailbox_rule_created — full session/telemetry for WS-FIN-014 and any other hosts is not represented in the facts.",
+      "Whether lateral movement to other Finance hosts or privileged accounts occurred using j.doe's session or password (F4 shows only these three events).",
+      "How the password was obtained (guessed vs. leaked/stuffed) — the facts show the pattern but not the source of the credential.",
+      "Whether j.doe was aware of or involved in the activity (insider possibility unresolved).",
+      "Attribution: 203.0.113.45 is not established as external/foreign infrastructure beyond the mock intel (F11), and mock intel is not relied on alone."
+    ],
+    "severity_view": {
+      "level": "critical",
+      "agrees_with_rubric": true,
+      "explanation": "If true, the impact is maxed out: an external actor got a valid session on a high-criticality Accounts Payable workstation (F1, F10) without MFA (F8), created an external mail-forwarding rule for persistent email collection (F5), and read 14 payables files from a Finance share (F6) — the combination of account takeover, email exfiltration setup, and sensitive financial data access justifies critical. I agree with the rubric; the only caveat is that actual data exfiltration is not evidenced in the facts, so the harm is 'access + collection staging' rather than confirmed loss, which does not lower the level given the asset criticality."
+    }
+  }
+}

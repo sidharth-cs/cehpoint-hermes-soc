@@ -1,0 +1,90 @@
+{
+  "alert_id": "ALR-2026-0001",
+  "evidence": [
+    {
+      "tool": "search_logs",
+      "finding": "Account timeline 02:30-03:45Z: the first event of any kind for j.doe is the failure burst at 02:58:05Z; 50 auth_failure (reason bad_password, user_agent python-requests/2.31) against WS-FIN-014 all from 203.0.113.45, spaced with a near-perfect 19-second cadence (02:58:05 -> 03:13:36), then auth_success EVT-00241 at 03:13:51Z on WS-FIN-014 from 203.0.113.45 with method=password and mfa=not_enrolled, same python-requests/2.31 user agent. No legitimate baseline activity appears in the lead-in window. Post-success: mailbox_rule_created EVT-00242 at 03:17:03Z (action forward_all to ext.billing-update@example.org, rule_name '..'), file_access EVT-00243 at 03:21:31Z (14 files, 8,421,377 bytes from \\\\fs-fin-01\\payables), logout EVT-00244 at 03:24:53Z, then another auth_success EVT-00245 at 04:17:51Z on WS-FIN-014 from 198.51.100.10 (a normal-IP range, no user agent recorded).",
+      "refs": [
+        "data/logs/events.jsonl#L172",
+        "data/logs/events.jsonl#L173",
+        "data/logs/events.jsonl#L241",
+        "data/logs/events.jsonl#L242",
+        "data/logs/events.jsonl#L243",
+        "data/logs/events.jsonl#L244",
+        "data/logs/events.jsonl#L246"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "search_logs",
+      "finding": "Exact alert-window scope (02:58:05Z-03:13:51Z) on WS-FIN-014: exactly 50 auth_failure + 1 auth_success, all from 203.0.113.45 — confirms the alert's counts and that the success came from the same IP and host. Failures are machine-timed (uniform 19s intervals), consistent with automated tooling rather than human typos.",
+      "refs": [
+        "data/logs/events.jsonl#L172",
+        "data/logs/events.jsonl#L242"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "search_logs",
+      "finding": "30-day look-back (2026-10-24T03:14:22Z to 2026-11-23T03:14:22Z) for j.doe from 203.0.113.45 returned only the 50 failures and 1 success all inside the alert window — the IP is genuinely unseen for this account in the prior 30 days, corroborating the rule's unfamiliar-IP criterion. Inventory baseline IPs for the account are 198.51.100.10 and 198.51.100.22.",
+      "refs": [
+        "data/logs/events.jsonl#L172",
+        "data/assets/inventory.json"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "search_logs",
+      "finding": "IP-wide view 02:30-03:45Z: 203.0.113.45 generated 74 events across three accounts — j.doe@example.com (54, incl. the single success), a.kumar@example.com/WS-FIN-009 (12 failures) and m.lee@example.com/WS-HR-003 (8 failures). All failures bad_password from python-requests/2.31, interleaved throughout the burst. This is a multi-account password spray, not a targeted guess, with j.doe the only success observed.",
+      "refs": [
+        "data/logs/events.jsonl#L176",
+        "data/logs/events.jsonl#L177",
+        "data/logs/events.jsonl#L235"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "get_asset_context",
+      "finding": "WS-FIN-014: Finance department, criticality high, Windows 11 23H2, role 'Accounts payable workstation', owner j.doe@example.com, software Microsoft Outlook 2021 and Citrix Workspace 2309 — the share accessed (\\\\fs-fin-01\\payables) matches an AP role and the mailbox provides mail access, consistent with the pre-staging suited to finance fraud.",
+      "refs": [
+        "data/assets/inventory.json"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "get_asset_context",
+      "finding": "j.doe@example.com: Finance AP Analyst, manager r.iyer@example.com, NOT privileged, mfa_enrolled=false, usual hours 03:30-12:30 UTC, usual_ips 198.51.100.10 and 198.51.100.22. The 02:58-03:13Z activity is slightly before usual hours and from an IP outside the baseline, and the absence of MFA enrolment explains why the password-only success needed no second factor (also seen on the 04:17:51Z login from 198.51.100.10).",
+      "refs": [
+        "data/assets/inventory.json"
+      ],
+      "mock": false
+    },
+    {
+      "tool": "lookup_ip",
+      "finding": "MOCK intel for 203.0.113.45 (documentation range RFC 5737, AS64500, country 'ZZ', synthetic): verdict 'malicious', score 87, tags credential-stuffing and password-spray, 23 reports, first_seen 2026-10-02, last_seen 2026-11-23. Illustrative mock context only — not verified live intelligence.",
+      "refs": [
+        "data/intel/ip_reputation_mock.json"
+      ],
+      "mock": true
+    },
+    {
+      "tool": "search_cve",
+      "finding": "MOCK intel snapshot (2026-11-20) returned 4 ATT&CK techniques and no CVEs: T1110 Brute Force, T1110.001 Password Guessing, T1110.003 Password Spraying, T1110.004 Credential Stuffing — the observed multi-account, ~19s-cadence bad_password pattern from a single IP best matches T1110.003 Password Spraying (with j.doe as the one success). No authentication-bypass CVE was implicated; no product-specific vulnerability claim can be made from this sweep. Mock/illustrative only.",
+      "refs": [
+        "data/intel/threat_intel_snapshot.json"
+      ],
+      "mock": true
+    }
+  ],
+  "tool_failures": [],
+  "open_questions": [
+    "Was the mail-forwarding rule (ext.billing-update@example.org) created by the attacker session and is that external address known to anyone in the organisation?",
+    "What 14 payables files were read (names/classification) and was any data actually exfiltrated externally, or only copied from the share to the session?",
+    "Was the 04:17:51Z login from 198.51.100.10 (j.doe's usual IP) the legitimate user, and did the real user report the account as compromised / notice password changes?",
+    "Was any mailbox content actually forwarded before the rule was noticed, and does the rule still exist?",
+    "Does any endpoint/process telemetry exist for WS-FIN-014 to confirm the python-requests session ran on the host vs. a remote client hitting a web/Citrix service, and was it a Citrix/Outlook web session?",
+    "How was the password obtained — reuse, breach dump, or guessing — and were other accounts (a.kumar, m.lee) compromised at other times beyond this window?",
+    "Is MFA simply not enrolled for the whole user population (j.doe false) and were there other successes by 203.0.113.45 outside the 02:30-03:45Z window or after 03:45Z?",
+    "Note: the log store reported 1 skipped malformed line per query, so some events may be missing from this reconstruction."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "alert_id": "ALR-2026-0002",
+  "created_at": "2026-11-23T03:14:30Z",
+  "source": "synthetic-siem",
+  "rule": {"id": "AUTH-BRUTE", "name": "Repeated failed logins for one account",
+           "description": "10+ failed logins for one account within 15 minutes."},
+  "severity_hint": "medium",
+  "entities": {"account": "a.kumar@example.com", "host": "WS-FIN-009", "source_ips": ["203.0.113.45"], "domains": []},
+  "observations": {"failed_logins": 12, "successful_logins": 0,
+                   "window_start": "2026-11-23T02:58:05Z", "window_end": "2026-11-23T03:13:51Z"},
+  "summary": "12 failed logins against a.kumar@example.com from 203.0.113.45 between 02:58 and 03:13 UTC. No successful login observed by the rule.",
+  "data_provenance": "synthetic"
+}

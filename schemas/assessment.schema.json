@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assessment.schema.json",
+  "title": "Analyst assessment (Day 3)",
+  "description": "The model's reading of the computed facts. It may only cite fact ids it was given.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["alert_id", "what_likely_happened", "hypotheses", "alternative_explanations", "unknowns", "severity_view"],
+  "properties": {
+    "alert_id": {"type": "string"},
+    "what_likely_happened": {"type": "string", "maxLength": 1500},
+    "hypotheses": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "status", "fact_ids", "explanation"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^H[0-9]+$"},
+          "status": {"enum": ["supported", "refuted", "undetermined"]},
+          "fact_ids": {"type": "array", "items": {"type": "string", "pattern": "^F[0-9]+$"}},
+          "explanation": {"type": "string"}
+        }
+      }
+    },
+    "alternative_explanations": {
+      "type": "array",
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["explanation", "fact_ids", "why_less_likely"],
+        "properties": {
+          "explanation": {"type": "string"},
+          "fact_ids": {"type": "array", "items": {"type": "string", "pattern": "^F[0-9]+$"}},
+          "why_less_likely": {"type": "string"}
+        }
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "severity_view": {
+      "type": "object", "additionalProperties": false,
+      "required": ["level", "agrees_with_rubric", "explanation"],
+      "properties": {
+        "level": {"enum": ["low", "medium", "high", "critical"]},
+        "agrees_with_rubric": {"type": "boolean"},
+        "explanation": {"type": "string"}
+      }
+    }
+  }
+}

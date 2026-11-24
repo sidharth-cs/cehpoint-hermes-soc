@@ -74,3 +74,29 @@ flowchart LR
   presents their findings as non-mock is rejected.
 - **Citable evidence.** Log events carry `ref` = `data/logs/events.jsonl#L<line>` so Day 3's timeline and Day 4's
   report can link every claim to a source line.
+
+## Day 3: investigation workflow
+
+```mermaid
+flowchart LR
+    A[Alert] --> P[Plan<br/>Hermes, no tools]
+    P --> E[Evidence<br/>Hermes + soc tools]
+    E --> T[(Tool trace<br/>full results)]
+    T --> C[correlate.py<br/>timeline + facts F1-F11<br/>no model]
+    C --> M[ATT&CK mapping<br/>fact-gated]
+    C --> S[Severity rubric]
+    C --> K[Confidence score]
+    C --> H[Assessment<br/>Hermes, no tools,<br/>cites fact ids only]
+    S --> H
+    K --> H
+```
+
+- **Why facts are computed in code:** the brief scores "conclusions trace back to evidence" and "no unsupported
+  claims". Computing facts deterministically from tool results means every fact has a status and refs and none can
+  be invented; the model's job is interpretation, and its citations are checked against the fact list.
+- **Missing data is a status, not a guess.** If the look-back or post-login window was not searched, or a tool
+  failed, the fact is `unknown` and lowers confidence. Severity is never raised on an unknown.
+- **Severity vs confidence.** Severity is how bad it is if true (rubric over confirmed facts). Confidence is how sure
+  we are (gaps, failures, conflicts). A tool failure lowers confidence but does not change severity.
+- **Disagreement is shown, not hidden.** The model states its own severity and whether it agrees with the rubric; a
+  mismatch is reported for the analyst.

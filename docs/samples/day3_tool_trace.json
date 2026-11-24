@@ -1,0 +1,3419 @@
+{
+  "alert_id": "ALR-2026-0001",
+  "calls": [
+    {
+      "seq": 1,
+      "tool": "search_logs",
+      "reason": "Step 1: reconstruct the full authentication timeline for j.doe around the alert window (02:30-03:45Z).",
+      "arguments": {
+        "account": "j.doe@example.com",
+        "start": "2026-11-23T02:30:00Z",
+        "end": "2026-11-23T03:45:00Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=54",
+      "result": {
+        "returned": 54,
+        "total_matched": 54,
+        "truncated": false,
+        "skipped_malformed_lines": 1,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 50,
+            "auth_success": 1,
+            "mailbox_rule_created": 1,
+            "file_access": 1,
+            "logout": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 54
+          },
+          "by_account": {
+            "j.doe@example.com": 54
+          },
+          "first_ts": "2026-11-23T02:58:05Z",
+          "last_ts": "2026-11-23T03:24:53Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-00171",
+            "ts": "2026-11-23T02:58:05Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L172"
+          },
+          {
+            "event_id": "EVT-00172",
+            "ts": "2026-11-23T02:58:24Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L173"
+          },
+          {
+            "event_id": "EVT-00173",
+            "ts": "2026-11-23T02:58:43Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L174"
+          },
+          {
+            "event_id": "EVT-00174",
+            "ts": "2026-11-23T02:59:02Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L175"
+          },
+          {
+            "event_id": "EVT-00177",
+            "ts": "2026-11-23T02:59:21Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L178"
+          },
+          {
+            "event_id": "EVT-00178",
+            "ts": "2026-11-23T02:59:40Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L179"
+          },
+          {
+            "event_id": "EVT-00179",
+            "ts": "2026-11-23T02:59:59Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L180"
+          },
+          {
+            "event_id": "EVT-00180",
+            "ts": "2026-11-23T03:00:18Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L181"
+          },
+          {
+            "event_id": "EVT-00183",
+            "ts": "2026-11-23T03:00:37Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L184"
+          },
+          {
+            "event_id": "EVT-00184",
+            "ts": "2026-11-23T03:00:56Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L185"
+          },
+          {
+            "event_id": "EVT-00185",
+            "ts": "2026-11-23T03:01:15Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L186"
+          },
+          {
+            "event_id": "EVT-00188",
+            "ts": "2026-11-23T03:01:34Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L189"
+          },
+          {
+            "event_id": "EVT-00189",
+            "ts": "2026-11-23T03:01:53Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L190"
+          },
+          {
+            "event_id": "EVT-00190",
+            "ts": "2026-11-23T03:02:12Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L191"
+          },
+          {
+            "event_id": "EVT-00191",
+            "ts": "2026-11-23T03:02:31Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L192"
+          },
+          {
+            "event_id": "EVT-00194",
+            "ts": "2026-11-23T03:02:50Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L195"
+          },
+          {
+            "event_id": "EVT-00195",
+            "ts": "2026-11-23T03:03:09Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L196"
+          },
+          {
+            "event_id": "EVT-00196",
+            "ts": "2026-11-23T03:03:28Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L197"
+          },
+          {
+            "event_id": "EVT-00198",
+            "ts": "2026-11-23T03:03:47Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L199"
+          },
+          {
+            "event_id": "EVT-00200",
+            "ts": "2026-11-23T03:04:06Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L201"
+          },
+          {
+            "event_id": "EVT-00201",
+            "ts": "2026-11-23T03:04:25Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L202"
+          },
+          {
+            "event_id": "EVT-00202",
+            "ts": "2026-11-23T03:04:44Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L203"
+          },
+          {
+            "event_id": "EVT-00205",
+            "ts": "2026-11-23T03:05:03Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L206"
+          },
+          {
+            "event_id": "EVT-00206",
+            "ts": "2026-11-23T03:05:22Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L207"
+          },
+          {
+            "event_id": "EVT-00207",
+            "ts": "2026-11-23T03:05:41Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L208"
+          },
+          {
+            "event_id": "EVT-00208",
+            "ts": "2026-11-23T03:06:00Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L209"
+          },
+          {
+            "event_id": "EVT-00211",
+            "ts": "2026-11-23T03:06:19Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L212"
+          },
+          {
+            "event_id": "EVT-00212",
+            "ts": "2026-11-23T03:06:38Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L213"
+          },
+          {
+            "event_id": "EVT-00213",
+            "ts": "2026-11-23T03:06:57Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L214"
+          },
+          {
+            "event_id": "EVT-00214",
+            "ts": "2026-11-23T03:07:16Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L215"
+          },
+          {
+            "event_id": "EVT-00217",
+            "ts": "2026-11-23T03:07:35Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L218"
+          },
+          {
+            "event_id": "EVT-00218",
+            "ts": "2026-11-23T03:07:54Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L219"
+          },
+          {
+            "event_id": "EVT-00219",
+            "ts": "2026-11-23T03:08:13Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L220"
+          },
+          {
+            "event_id": "EVT-00221",
+            "ts": "2026-11-23T03:08:32Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L222"
+          },
+          {
+            "event_id": "EVT-00222",
+            "ts": "2026-11-23T03:08:51Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L223"
+          },
+          {
+            "event_id": "EVT-00223",
+            "ts": "2026-11-23T03:09:10Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L224"
+          },
+          {
+            "event_id": "EVT-00224",
+            "ts": "2026-11-23T03:09:29Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L225"
+          },
+          {
+            "event_id": "EVT-00226",
+            "ts": "2026-11-23T03:09:48Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L227"
+          },
+          {
+            "event_id": "EVT-00227",
+            "ts": "2026-11-23T03:10:07Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L228"
+          },
+          {
+            "event_id": "EVT-00228",
+            "ts": "2026-11-23T03:10:26Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L229"
+          },
+          {
+            "event_id": "EVT-00229",
+            "ts": "2026-11-23T03:10:45Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L230"
+          },
+          {
+            "event_id": "EVT-00231",
+            "ts": "2026-11-23T03:11:04Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L232"
+          },
+          {
+            "event_id": "EVT-00232",
+            "ts": "2026-11-23T03:11:23Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L233"
+          },
+          {
+            "event_id": "EVT-00233",
+            "ts": "2026-11-23T03:11:42Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L234"
+          },
+          {
+            "event_id": "EVT-00235",
+            "ts": "2026-11-23T03:12:01Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L236"
+          },
+          {
+            "event_id": "EVT-00236",
+            "ts": "2026-11-23T03:12:20Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L237"
+          },
+          {
+            "event_id": "EVT-00237",
+            "ts": "2026-11-23T03:12:39Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L238"
+          },
+          {
+            "event_id": "EVT-00238",
+            "ts": "2026-11-23T03:12:58Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L239"
+          },
+          {
+            "event_id": "EVT-00239",
+            "ts": "2026-11-23T03:13:17Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L240"
+          },
+          {
+            "event_id": "EVT-00240",
+            "ts": "2026-11-23T03:13:36Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L241"
+          },
+          {
+            "event_id": "EVT-00241",
+            "ts": "2026-11-23T03:13:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L242"
+          },
+          {
+            "event_id": "EVT-00242",
+            "ts": "2026-11-23T03:17:03Z",
+            "event_type": "mailbox_rule_created",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "action": "forward_all",
+              "forward_to": "ext.billing-update@example.org",
+              "rule_name": ".."
+            },
+            "ref": "data/logs/events.jsonl#L243"
+          },
+          {
+            "event_id": "EVT-00243",
+            "ts": "2026-11-23T03:21:31Z",
+            "event_type": "file_access",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "bytes_read": 8421377,
+              "files_read": 14,
+              "share": "\\\\fs-fin-01\\payables"
+            },
+            "ref": "data/logs/events.jsonl#L244"
+          },
+          {
+            "event_id": "EVT-00244",
+            "ts": "2026-11-23T03:24:53Z",
+            "event_type": "logout",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {},
+            "ref": "data/logs/events.jsonl#L245"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.3,
+      "source": "synthetic log store (data/logs/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 2,
+      "tool": "search_logs",
+      "reason": "Step 2: tightly scope the 50 failures and single success on WS-FIN-014 within the alert's exact window.",
+      "arguments": {
+        "account": "j.doe@example.com",
+        "host": "WS-FIN-014",
+        "start": "2026-11-23T02:58:05Z",
+        "end": "2026-11-23T03:13:51Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=51",
+      "result": {
+        "returned": 51,
+        "total_matched": 51,
+        "truncated": false,
+        "skipped_malformed_lines": 1,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 50,
+            "auth_success": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 51
+          },
+          "by_account": {
+            "j.doe@example.com": 51
+          },
+          "first_ts": "2026-11-23T02:58:05Z",
+          "last_ts": "2026-11-23T03:13:51Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-00171",
+            "ts": "2026-11-23T02:58:05Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L172"
+          },
+          {
+            "event_id": "EVT-00172",
+            "ts": "2026-11-23T02:58:24Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L173"
+          },
+          {
+            "event_id": "EVT-00173",
+            "ts": "2026-11-23T02:58:43Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L174"
+          },
+          {
+            "event_id": "EVT-00174",
+            "ts": "2026-11-23T02:59:02Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L175"
+          },
+          {
+            "event_id": "EVT-00177",
+            "ts": "2026-11-23T02:59:21Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L178"
+          },
+          {
+            "event_id": "EVT-00178",
+            "ts": "2026-11-23T02:59:40Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L179"
+          },
+          {
+            "event_id": "EVT-00179",
+            "ts": "2026-11-23T02:59:59Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L180"
+          },
+          {
+            "event_id": "EVT-00180",
+            "ts": "2026-11-23T03:00:18Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L181"
+          },
+          {
+            "event_id": "EVT-00183",
+            "ts": "2026-11-23T03:00:37Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L184"
+          },
+          {
+            "event_id": "EVT-00184",
+            "ts": "2026-11-23T03:00:56Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L185"
+          },
+          {
+            "event_id": "EVT-00185",
+            "ts": "2026-11-23T03:01:15Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L186"
+          },
+          {
+            "event_id": "EVT-00188",
+            "ts": "2026-11-23T03:01:34Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L189"
+          },
+          {
+            "event_id": "EVT-00189",
+            "ts": "2026-11-23T03:01:53Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L190"
+          },
+          {
+            "event_id": "EVT-00190",
+            "ts": "2026-11-23T03:02:12Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L191"
+          },
+          {
+            "event_id": "EVT-00191",
+            "ts": "2026-11-23T03:02:31Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L192"
+          },
+          {
+            "event_id": "EVT-00194",
+            "ts": "2026-11-23T03:02:50Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L195"
+          },
+          {
+            "event_id": "EVT-00195",
+            "ts": "2026-11-23T03:03:09Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L196"
+          },
+          {
+            "event_id": "EVT-00196",
+            "ts": "2026-11-23T03:03:28Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L197"
+          },
+          {
+            "event_id": "EVT-00198",
+            "ts": "2026-11-23T03:03:47Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L199"
+          },
+          {
+            "event_id": "EVT-00200",
+            "ts": "2026-11-23T03:04:06Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L201"
+          },
+          {
+            "event_id": "EVT-00201",
+            "ts": "2026-11-23T03:04:25Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L202"
+          },
+          {
+            "event_id": "EVT-00202",
+            "ts": "2026-11-23T03:04:44Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L203"
+          },
+          {
+            "event_id": "EVT-00205",
+            "ts": "2026-11-23T03:05:03Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L206"
+          },
+          {
+            "event_id": "EVT-00206",
+            "ts": "2026-11-23T03:05:22Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L207"
+          },
+          {
+            "event_id": "EVT-00207",
+            "ts": "2026-11-23T03:05:41Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L208"
+          },
+          {
+            "event_id": "EVT-00208",
+            "ts": "2026-11-23T03:06:00Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L209"
+          },
+          {
+            "event_id": "EVT-00211",
+            "ts": "2026-11-23T03:06:19Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L212"
+          },
+          {
+            "event_id": "EVT-00212",
+            "ts": "2026-11-23T03:06:38Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L213"
+          },
+          {
+            "event_id": "EVT-00213",
+            "ts": "2026-11-23T03:06:57Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L214"
+          },
+          {
+            "event_id": "EVT-00214",
+            "ts": "2026-11-23T03:07:16Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L215"
+          },
+          {
+            "event_id": "EVT-00217",
+            "ts": "2026-11-23T03:07:35Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L218"
+          },
+          {
+            "event_id": "EVT-00218",
+            "ts": "2026-11-23T03:07:54Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L219"
+          },
+          {
+            "event_id": "EVT-00219",
+            "ts": "2026-11-23T03:08:13Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L220"
+          },
+          {
+            "event_id": "EVT-00221",
+            "ts": "2026-11-23T03:08:32Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L222"
+          },
+          {
+            "event_id": "EVT-00222",
+            "ts": "2026-11-23T03:08:51Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L223"
+          },
+          {
+            "event_id": "EVT-00223",
+            "ts": "2026-11-23T03:09:10Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L224"
+          },
+          {
+            "event_id": "EVT-00224",
+            "ts": "2026-11-23T03:09:29Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L225"
+          },
+          {
+            "event_id": "EVT-00226",
+            "ts": "2026-11-23T03:09:48Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L227"
+          },
+          {
+            "event_id": "EVT-00227",
+            "ts": "2026-11-23T03:10:07Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L228"
+          },
+          {
+            "event_id": "EVT-00228",
+            "ts": "2026-11-23T03:10:26Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L229"
+          },
+          {
+            "event_id": "EVT-00229",
+            "ts": "2026-11-23T03:10:45Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L230"
+          },
+          {
+            "event_id": "EVT-00231",
+            "ts": "2026-11-23T03:11:04Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L232"
+          },
+          {
+            "event_id": "EVT-00232",
+            "ts": "2026-11-23T03:11:23Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L233"
+          },
+          {
+            "event_id": "EVT-00233",
+            "ts": "2026-11-23T03:11:42Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L234"
+          },
+          {
+            "event_id": "EVT-00235",
+            "ts": "2026-11-23T03:12:01Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L236"
+          },
+          {
+            "event_id": "EVT-00236",
+            "ts": "2026-11-23T03:12:20Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L237"
+          },
+          {
+            "event_id": "EVT-00237",
+            "ts": "2026-11-23T03:12:39Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L238"
+          },
+          {
+            "event_id": "EVT-00238",
+            "ts": "2026-11-23T03:12:58Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L239"
+          },
+          {
+            "event_id": "EVT-00239",
+            "ts": "2026-11-23T03:13:17Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L240"
+          },
+          {
+            "event_id": "EVT-00240",
+            "ts": "2026-11-23T03:13:36Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L241"
+          },
+          {
+            "event_id": "EVT-00241",
+            "ts": "2026-11-23T03:13:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L242"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 2.1,
+      "source": "synthetic log store (data/logs/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 3,
+      "tool": "search_logs",
+      "reason": "Step 3: 30-day look-back to verify whether 203.0.113.45 was previously seen for this account.",
+      "arguments": {
+        "account": "j.doe@example.com",
+        "src_ip": "203.0.113.45",
+        "start": "2026-10-24T03:14:22Z",
+        "end": "2026-11-23T03:14:22Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=51",
+      "result": {
+        "returned": 51,
+        "total_matched": 51,
+        "truncated": false,
+        "skipped_malformed_lines": 1,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 50,
+            "auth_success": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 51
+          },
+          "by_account": {
+            "j.doe@example.com": 51
+          },
+          "first_ts": "2026-11-23T02:58:05Z",
+          "last_ts": "2026-11-23T03:13:51Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-00171",
+            "ts": "2026-11-23T02:58:05Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L172"
+          },
+          {
+            "event_id": "EVT-00172",
+            "ts": "2026-11-23T02:58:24Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L173"
+          },
+          {
+            "event_id": "EVT-00173",
+            "ts": "2026-11-23T02:58:43Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L174"
+          },
+          {
+            "event_id": "EVT-00174",
+            "ts": "2026-11-23T02:59:02Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L175"
+          },
+          {
+            "event_id": "EVT-00177",
+            "ts": "2026-11-23T02:59:21Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L178"
+          },
+          {
+            "event_id": "EVT-00178",
+            "ts": "2026-11-23T02:59:40Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L179"
+          },
+          {
+            "event_id": "EVT-00179",
+            "ts": "2026-11-23T02:59:59Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L180"
+          },
+          {
+            "event_id": "EVT-00180",
+            "ts": "2026-11-23T03:00:18Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L181"
+          },
+          {
+            "event_id": "EVT-00183",
+            "ts": "2026-11-23T03:00:37Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L184"
+          },
+          {
+            "event_id": "EVT-00184",
+            "ts": "2026-11-23T03:00:56Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L185"
+          },
+          {
+            "event_id": "EVT-00185",
+            "ts": "2026-11-23T03:01:15Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L186"
+          },
+          {
+            "event_id": "EVT-00188",
+            "ts": "2026-11-23T03:01:34Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L189"
+          },
+          {
+            "event_id": "EVT-00189",
+            "ts": "2026-11-23T03:01:53Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L190"
+          },
+          {
+            "event_id": "EVT-00190",
+            "ts": "2026-11-23T03:02:12Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L191"
+          },
+          {
+            "event_id": "EVT-00191",
+            "ts": "2026-11-23T03:02:31Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L192"
+          },
+          {
+            "event_id": "EVT-00194",
+            "ts": "2026-11-23T03:02:50Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L195"
+          },
+          {
+            "event_id": "EVT-00195",
+            "ts": "2026-11-23T03:03:09Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L196"
+          },
+          {
+            "event_id": "EVT-00196",
+            "ts": "2026-11-23T03:03:28Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L197"
+          },
+          {
+            "event_id": "EVT-00198",
+            "ts": "2026-11-23T03:03:47Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L199"
+          },
+          {
+            "event_id": "EVT-00200",
+            "ts": "2026-11-23T03:04:06Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L201"
+          },
+          {
+            "event_id": "EVT-00201",
+            "ts": "2026-11-23T03:04:25Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L202"
+          },
+          {
+            "event_id": "EVT-00202",
+            "ts": "2026-11-23T03:04:44Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L203"
+          },
+          {
+            "event_id": "EVT-00205",
+            "ts": "2026-11-23T03:05:03Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L206"
+          },
+          {
+            "event_id": "EVT-00206",
+            "ts": "2026-11-23T03:05:22Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L207"
+          },
+          {
+            "event_id": "EVT-00207",
+            "ts": "2026-11-23T03:05:41Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L208"
+          },
+          {
+            "event_id": "EVT-00208",
+            "ts": "2026-11-23T03:06:00Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L209"
+          },
+          {
+            "event_id": "EVT-00211",
+            "ts": "2026-11-23T03:06:19Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L212"
+          },
+          {
+            "event_id": "EVT-00212",
+            "ts": "2026-11-23T03:06:38Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L213"
+          },
+          {
+            "event_id": "EVT-00213",
+            "ts": "2026-11-23T03:06:57Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L214"
+          },
+          {
+            "event_id": "EVT-00214",
+            "ts": "2026-11-23T03:07:16Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L215"
+          },
+          {
+            "event_id": "EVT-00217",
+            "ts": "2026-11-23T03:07:35Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L218"
+          },
+          {
+            "event_id": "EVT-00218",
+            "ts": "2026-11-23T03:07:54Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L219"
+          },
+          {
+            "event_id": "EVT-00219",
+            "ts": "2026-11-23T03:08:13Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L220"
+          },
+          {
+            "event_id": "EVT-00221",
+            "ts": "2026-11-23T03:08:32Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L222"
+          },
+          {
+            "event_id": "EVT-00222",
+            "ts": "2026-11-23T03:08:51Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L223"
+          },
+          {
+            "event_id": "EVT-00223",
+            "ts": "2026-11-23T03:09:10Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L224"
+          },
+          {
+            "event_id": "EVT-00224",
+            "ts": "2026-11-23T03:09:29Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L225"
+          },
+          {
+            "event_id": "EVT-00226",
+            "ts": "2026-11-23T03:09:48Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L227"
+          },
+          {
+            "event_id": "EVT-00227",
+            "ts": "2026-11-23T03:10:07Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L228"
+          },
+          {
+            "event_id": "EVT-00228",
+            "ts": "2026-11-23T03:10:26Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L229"
+          },
+          {
+            "event_id": "EVT-00229",
+            "ts": "2026-11-23T03:10:45Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L230"
+          },
+          {
+            "event_id": "EVT-00231",
+            "ts": "2026-11-23T03:11:04Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L232"
+          },
+          {
+            "event_id": "EVT-00232",
+            "ts": "2026-11-23T03:11:23Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L233"
+          },
+          {
+            "event_id": "EVT-00233",
+            "ts": "2026-11-23T03:11:42Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L234"
+          },
+          {
+            "event_id": "EVT-00235",
+            "ts": "2026-11-23T03:12:01Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L236"
+          },
+          {
+            "event_id": "EVT-00236",
+            "ts": "2026-11-23T03:12:20Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L237"
+          },
+          {
+            "event_id": "EVT-00237",
+            "ts": "2026-11-23T03:12:39Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L238"
+          },
+          {
+            "event_id": "EVT-00238",
+            "ts": "2026-11-23T03:12:58Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L239"
+          },
+          {
+            "event_id": "EVT-00239",
+            "ts": "2026-11-23T03:13:17Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L240"
+          },
+          {
+            "event_id": "EVT-00240",
+            "ts": "2026-11-23T03:13:36Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L241"
+          },
+          {
+            "event_id": "EVT-00241",
+            "ts": "2026-11-23T03:13:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L242"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.9,
+      "source": "synthetic log store (data/logs/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 4,
+      "tool": "search_logs",
+      "reason": "Step 4: check whether 203.0.113.45 targeted other accounts, indicating spraying rather than a targeted guess.",
+      "arguments": {
+        "src_ip": "203.0.113.45",
+        "start": "2026-11-23T02:30:00Z",
+        "end": "2026-11-23T03:45:00Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=74",
+      "result": {
+        "returned": 74,
+        "total_matched": 74,
+        "truncated": false,
+        "skipped_malformed_lines": 1,
+        "summary": {
+          "by_event_type": {
+            "auth_failure": 70,
+            "auth_success": 1,
+            "mailbox_rule_created": 1,
+            "file_access": 1,
+            "logout": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 74
+          },
+          "by_account": {
+            "j.doe@example.com": 54,
+            "m.lee@example.com": 8,
+            "a.kumar@example.com": 12
+          },
+          "first_ts": "2026-11-23T02:58:05Z",
+          "last_ts": "2026-11-23T03:24:53Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-00171",
+            "ts": "2026-11-23T02:58:05Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L172"
+          },
+          {
+            "event_id": "EVT-00172",
+            "ts": "2026-11-23T02:58:24Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L173"
+          },
+          {
+            "event_id": "EVT-00173",
+            "ts": "2026-11-23T02:58:43Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L174"
+          },
+          {
+            "event_id": "EVT-00174",
+            "ts": "2026-11-23T02:59:02Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L175"
+          },
+          {
+            "event_id": "EVT-00175",
+            "ts": "2026-11-23T02:59:07Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L176"
+          },
+          {
+            "event_id": "EVT-00176",
+            "ts": "2026-11-23T02:59:11Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L177"
+          },
+          {
+            "event_id": "EVT-00177",
+            "ts": "2026-11-23T02:59:21Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L178"
+          },
+          {
+            "event_id": "EVT-00178",
+            "ts": "2026-11-23T02:59:40Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L179"
+          },
+          {
+            "event_id": "EVT-00179",
+            "ts": "2026-11-23T02:59:59Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L180"
+          },
+          {
+            "event_id": "EVT-00180",
+            "ts": "2026-11-23T03:00:18Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L181"
+          },
+          {
+            "event_id": "EVT-00181",
+            "ts": "2026-11-23T03:00:20Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L182"
+          },
+          {
+            "event_id": "EVT-00182",
+            "ts": "2026-11-23T03:00:24Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L183"
+          },
+          {
+            "event_id": "EVT-00183",
+            "ts": "2026-11-23T03:00:37Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L184"
+          },
+          {
+            "event_id": "EVT-00184",
+            "ts": "2026-11-23T03:00:56Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L185"
+          },
+          {
+            "event_id": "EVT-00185",
+            "ts": "2026-11-23T03:01:15Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L186"
+          },
+          {
+            "event_id": "EVT-00186",
+            "ts": "2026-11-23T03:01:28Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L187"
+          },
+          {
+            "event_id": "EVT-00187",
+            "ts": "2026-11-23T03:01:29Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L188"
+          },
+          {
+            "event_id": "EVT-00188",
+            "ts": "2026-11-23T03:01:34Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L189"
+          },
+          {
+            "event_id": "EVT-00189",
+            "ts": "2026-11-23T03:01:53Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L190"
+          },
+          {
+            "event_id": "EVT-00190",
+            "ts": "2026-11-23T03:02:12Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L191"
+          },
+          {
+            "event_id": "EVT-00191",
+            "ts": "2026-11-23T03:02:31Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L192"
+          },
+          {
+            "event_id": "EVT-00192",
+            "ts": "2026-11-23T03:02:35Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L193"
+          },
+          {
+            "event_id": "EVT-00193",
+            "ts": "2026-11-23T03:02:43Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L194"
+          },
+          {
+            "event_id": "EVT-00194",
+            "ts": "2026-11-23T03:02:50Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L195"
+          },
+          {
+            "event_id": "EVT-00195",
+            "ts": "2026-11-23T03:03:09Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L196"
+          },
+          {
+            "event_id": "EVT-00196",
+            "ts": "2026-11-23T03:03:28Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L197"
+          },
+          {
+            "event_id": "EVT-00197",
+            "ts": "2026-11-23T03:03:45Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L198"
+          },
+          {
+            "event_id": "EVT-00198",
+            "ts": "2026-11-23T03:03:47Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L199"
+          },
+          {
+            "event_id": "EVT-00199",
+            "ts": "2026-11-23T03:03:47Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L200"
+          },
+          {
+            "event_id": "EVT-00200",
+            "ts": "2026-11-23T03:04:06Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L201"
+          },
+          {
+            "event_id": "EVT-00201",
+            "ts": "2026-11-23T03:04:25Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L202"
+          },
+          {
+            "event_id": "EVT-00202",
+            "ts": "2026-11-23T03:04:44Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L203"
+          },
+          {
+            "event_id": "EVT-00203",
+            "ts": "2026-11-23T03:04:58Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L204"
+          },
+          {
+            "event_id": "EVT-00204",
+            "ts": "2026-11-23T03:05:01Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L205"
+          },
+          {
+            "event_id": "EVT-00205",
+            "ts": "2026-11-23T03:05:03Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L206"
+          },
+          {
+            "event_id": "EVT-00206",
+            "ts": "2026-11-23T03:05:22Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L207"
+          },
+          {
+            "event_id": "EVT-00207",
+            "ts": "2026-11-23T03:05:41Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L208"
+          },
+          {
+            "event_id": "EVT-00208",
+            "ts": "2026-11-23T03:06:00Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L209"
+          },
+          {
+            "event_id": "EVT-00209",
+            "ts": "2026-11-23T03:06:06Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L210"
+          },
+          {
+            "event_id": "EVT-00210",
+            "ts": "2026-11-23T03:06:14Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L211"
+          },
+          {
+            "event_id": "EVT-00211",
+            "ts": "2026-11-23T03:06:19Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L212"
+          },
+          {
+            "event_id": "EVT-00212",
+            "ts": "2026-11-23T03:06:38Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L213"
+          },
+          {
+            "event_id": "EVT-00213",
+            "ts": "2026-11-23T03:06:57Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L214"
+          },
+          {
+            "event_id": "EVT-00214",
+            "ts": "2026-11-23T03:07:16Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L215"
+          },
+          {
+            "event_id": "EVT-00215",
+            "ts": "2026-11-23T03:07:18Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L216"
+          },
+          {
+            "event_id": "EVT-00216",
+            "ts": "2026-11-23T03:07:18Z",
+            "event_type": "auth_failure",
+            "account": "m.lee@example.com",
+            "host": "WS-HR-003",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L217"
+          },
+          {
+            "event_id": "EVT-00217",
+            "ts": "2026-11-23T03:07:35Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L218"
+          },
+          {
+            "event_id": "EVT-00218",
+            "ts": "2026-11-23T03:07:54Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L219"
+          },
+          {
+            "event_id": "EVT-00219",
+            "ts": "2026-11-23T03:08:13Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L220"
+          },
+          {
+            "event_id": "EVT-00220",
+            "ts": "2026-11-23T03:08:25Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L221"
+          },
+          {
+            "event_id": "EVT-00221",
+            "ts": "2026-11-23T03:08:32Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L222"
+          },
+          {
+            "event_id": "EVT-00222",
+            "ts": "2026-11-23T03:08:51Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L223"
+          },
+          {
+            "event_id": "EVT-00223",
+            "ts": "2026-11-23T03:09:10Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L224"
+          },
+          {
+            "event_id": "EVT-00224",
+            "ts": "2026-11-23T03:09:29Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L225"
+          },
+          {
+            "event_id": "EVT-00225",
+            "ts": "2026-11-23T03:09:42Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L226"
+          },
+          {
+            "event_id": "EVT-00226",
+            "ts": "2026-11-23T03:09:48Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L227"
+          },
+          {
+            "event_id": "EVT-00227",
+            "ts": "2026-11-23T03:10:07Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L228"
+          },
+          {
+            "event_id": "EVT-00228",
+            "ts": "2026-11-23T03:10:26Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L229"
+          },
+          {
+            "event_id": "EVT-00229",
+            "ts": "2026-11-23T03:10:45Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L230"
+          },
+          {
+            "event_id": "EVT-00230",
+            "ts": "2026-11-23T03:10:54Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L231"
+          },
+          {
+            "event_id": "EVT-00231",
+            "ts": "2026-11-23T03:11:04Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L232"
+          },
+          {
+            "event_id": "EVT-00232",
+            "ts": "2026-11-23T03:11:23Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L233"
+          },
+          {
+            "event_id": "EVT-00233",
+            "ts": "2026-11-23T03:11:42Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L234"
+          },
+          {
+            "event_id": "EVT-00234",
+            "ts": "2026-11-23T03:12:00Z",
+            "event_type": "auth_failure",
+            "account": "a.kumar@example.com",
+            "host": "WS-FIN-009",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L235"
+          },
+          {
+            "event_id": "EVT-00235",
+            "ts": "2026-11-23T03:12:01Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L236"
+          },
+          {
+            "event_id": "EVT-00236",
+            "ts": "2026-11-23T03:12:20Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L237"
+          },
+          {
+            "event_id": "EVT-00237",
+            "ts": "2026-11-23T03:12:39Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L238"
+          },
+          {
+            "event_id": "EVT-00238",
+            "ts": "2026-11-23T03:12:58Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L239"
+          },
+          {
+            "event_id": "EVT-00239",
+            "ts": "2026-11-23T03:13:17Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L240"
+          },
+          {
+            "event_id": "EVT-00240",
+            "ts": "2026-11-23T03:13:36Z",
+            "event_type": "auth_failure",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "reason": "bad_password",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L241"
+          },
+          {
+            "event_id": "EVT-00241",
+            "ts": "2026-11-23T03:13:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L242"
+          },
+          {
+            "event_id": "EVT-00242",
+            "ts": "2026-11-23T03:17:03Z",
+            "event_type": "mailbox_rule_created",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "action": "forward_all",
+              "forward_to": "ext.billing-update@example.org",
+              "rule_name": ".."
+            },
+            "ref": "data/logs/events.jsonl#L243"
+          },
+          {
+            "event_id": "EVT-00243",
+            "ts": "2026-11-23T03:21:31Z",
+            "event_type": "file_access",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "bytes_read": 8421377,
+              "files_read": 14,
+              "share": "\\\\fs-fin-01\\payables"
+            },
+            "ref": "data/logs/events.jsonl#L244"
+          },
+          {
+            "event_id": "EVT-00244",
+            "ts": "2026-11-23T03:24:53Z",
+            "event_type": "logout",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {},
+            "ref": "data/logs/events.jsonl#L245"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 2.4,
+      "source": "synthetic log store (data/logs/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 5,
+      "tool": "search_logs",
+      "reason": "Step 6: forward 24-hour window from the successful login to detect persistence or lateral movement.",
+      "arguments": {
+        "account": "j.doe@example.com",
+        "host": "WS-FIN-014",
+        "start": "2026-11-23T03:13:51Z",
+        "end": "2026-11-24T03:13:51Z",
+        "limit": 200
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "returned=5",
+      "result": {
+        "returned": 5,
+        "total_matched": 5,
+        "truncated": false,
+        "skipped_malformed_lines": 1,
+        "summary": {
+          "by_event_type": {
+            "auth_success": 2,
+            "mailbox_rule_created": 1,
+            "file_access": 1,
+            "logout": 1
+          },
+          "by_src_ip": {
+            "203.0.113.45": 4,
+            "198.51.100.10": 1
+          },
+          "by_account": {
+            "j.doe@example.com": 5
+          },
+          "first_ts": "2026-11-23T03:13:51Z",
+          "last_ts": "2026-11-23T04:17:51Z"
+        },
+        "events": [
+          {
+            "event_id": "EVT-00241",
+            "ts": "2026-11-23T03:13:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled",
+              "user_agent": "python-requests/2.31"
+            },
+            "ref": "data/logs/events.jsonl#L242"
+          },
+          {
+            "event_id": "EVT-00242",
+            "ts": "2026-11-23T03:17:03Z",
+            "event_type": "mailbox_rule_created",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "action": "forward_all",
+              "forward_to": "ext.billing-update@example.org",
+              "rule_name": ".."
+            },
+            "ref": "data/logs/events.jsonl#L243"
+          },
+          {
+            "event_id": "EVT-00243",
+            "ts": "2026-11-23T03:21:31Z",
+            "event_type": "file_access",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {
+              "bytes_read": 8421377,
+              "files_read": 14,
+              "share": "\\\\fs-fin-01\\payables"
+            },
+            "ref": "data/logs/events.jsonl#L244"
+          },
+          {
+            "event_id": "EVT-00244",
+            "ts": "2026-11-23T03:24:53Z",
+            "event_type": "logout",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "203.0.113.45",
+            "details": {},
+            "ref": "data/logs/events.jsonl#L245"
+          },
+          {
+            "event_id": "EVT-00245",
+            "ts": "2026-11-23T04:17:51Z",
+            "event_type": "auth_success",
+            "account": "j.doe@example.com",
+            "host": "WS-FIN-014",
+            "src_ip": "198.51.100.10",
+            "details": {
+              "method": "password",
+              "mfa": "not_enrolled"
+            },
+            "ref": "data/logs/events.jsonl#L246"
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.2,
+      "source": "synthetic log store (data/logs/events.jsonl)",
+      "mock": false
+    },
+    {
+      "seq": 6,
+      "tool": "get_asset_context",
+      "reason": "Step 7: obtain criticality, ownership and role of host WS-FIN-014.",
+      "arguments": {
+        "host": "WS-FIN-014"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "found=True",
+      "result": {
+        "found": true,
+        "host": {
+          "name": "WS-FIN-014",
+          "found": true,
+          "criticality": "high",
+          "department": "Finance",
+          "os": "Windows 11 23H2",
+          "owner": "j.doe@example.com",
+          "role": "Accounts payable workstation",
+          "software": [
+            "Microsoft Outlook 2021",
+            "Citrix Workspace 2309"
+          ]
+        }
+      },
+      "duration_ms": 1.0,
+      "source": "synthetic asset inventory (data/assets/inventory.json)",
+      "mock": false
+    },
+    {
+      "seq": 7,
+      "tool": "get_asset_context",
+      "reason": "Step 8: obtain identity, department, privileges and normal working pattern for j.doe@example.com.",
+      "arguments": {
+        "account": "j.doe@example.com"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "found=True",
+      "result": {
+        "found": true,
+        "account": {
+          "name": "j.doe@example.com",
+          "found": true,
+          "department": "Finance",
+          "display_name": "J. Doe",
+          "manager": "r.iyer@example.com",
+          "mfa_enrolled": false,
+          "privileged": false,
+          "title": "AP Analyst",
+          "usual_hours_utc": "03:30-12:30",
+          "usual_ips": [
+            "198.51.100.10",
+            "198.51.100.22"
+          ]
+        }
+      },
+      "duration_ms": 0.9,
+      "source": "synthetic asset inventory (data/assets/inventory.json)",
+      "mock": false
+    },
+    {
+      "seq": 8,
+      "tool": "lookup_ip",
+      "reason": "Step 9: retrieve mock reputation/geolocation context for the alert's sole source IP 203.0.113.45.",
+      "arguments": {
+        "ip": "203.0.113.45"
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "found=True",
+      "result": {
+        "ip": "203.0.113.45",
+        "ip_class": "documentation range (RFC 5737), synthetic",
+        "found": true,
+        "intel_source": "MOCK",
+        "verdict": "malicious",
+        "score": 87,
+        "tags": [
+          "credential-stuffing",
+          "password-spray"
+        ],
+        "asn": "AS64500 (documentation ASN)",
+        "country": "ZZ",
+        "first_seen": "2026-10-02",
+        "last_seen": "2026-11-23",
+        "reports": 23
+      },
+      "duration_ms": 1.1,
+      "source": "MOCK IP reputation (data/intel/ip_reputation_mock.json)",
+      "mock": true
+    },
+    {
+      "seq": 9,
+      "tool": "search_cve",
+      "reason": "Step 10: broad keyword sweep of the mock intel snapshot for brute-force/spray tooling or auth-bypass entries.",
+      "arguments": {
+        "query": "authentication brute force",
+        "limit": 10
+      },
+      "ok": true,
+      "error": null,
+      "result_summary": "count=4",
+      "result": {
+        "count": 4,
+        "snapshot_date": "2026-11-20",
+        "matches": [
+          {
+            "id": "T1110",
+            "kind": "attack_technique",
+            "name": "Brute Force",
+            "tactic": "Credential Access",
+            "summary": "Adversaries guess credentials when passwords are unknown or hashes are obtained."
+          },
+          {
+            "id": "T1110.001",
+            "kind": "attack_technique",
+            "name": "Brute Force: Password Guessing",
+            "tactic": "Credential Access",
+            "summary": "Repeated password attempts against a single account."
+          },
+          {
+            "id": "T1110.003",
+            "kind": "attack_technique",
+            "name": "Brute Force: Password Spraying",
+            "tactic": "Credential Access",
+            "summary": "A few common passwords tried against many accounts to avoid lockouts."
+          },
+          {
+            "id": "T1110.004",
+            "kind": "attack_technique",
+            "name": "Brute Force: Credential Stuffing",
+            "tactic": "Credential Access",
+            "summary": "Credentials from breach dumps tried against other services."
+          }
+        ],
+        "note": null
+      },
+      "duration_ms": 1.2,
+      "source": "MOCK local snapshot (data/intel/threat_intel_snapshot.json)",
+      "mock": true
+    }
+  ]
+}

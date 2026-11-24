@@ -4,9 +4,10 @@ A prototype junior SOC analyst: it receives a security alert, plans an investiga
 tools, and (by Day 5) produces an evidence-backed, auditable incident report with analyst approval
 before any disruptive action. Hermes Agent is the orchestration layer; DeepSeek is the model.
 
-> **Status: Day 2** - four validated, read-only tools wired into Hermes as the only enabled toolset; the agent
-> picks tools from the plan, states why for every call, and returns cited evidence. Correlation and severity (Day 3),
-> reporting and the approval gate (Day 4) and final testing (Day 5) follow.
+> **Status: Day 3** - end-to-end investigation: plan, evidence gathering with four read-only tools, a timestamped
+> timeline, evidence facts computed from tool results, MITRE ATT&CK mapping, severity and confidence assessed
+> separately, and a Hermes assessment that may only cite those facts. Reporting and the approval gate (Day 4) and
+> final testing (Day 5) follow.
 
 ## Prerequisites
 
@@ -37,8 +38,10 @@ home directory `.hermes_home/` inside the repo, so it does not read or change an
 ```
 
 ```bash
-# Day 2: plan, then let Hermes gather evidence with the four approved tools
-.venv/bin/python -m soc_agent investigate data/alerts/ALR-2026-0001.json
+# Full investigation: plan -> tools -> timeline + facts -> severity/confidence -> assessment
+.venv/bin/python -m soc_agent investigate data/alerts/ALR-2026-0001.json   # mandatory scenario (account compromise)
+.venv/bin/python -m soc_agent investigate data/alerts/ALR-2026-0002.json   # spray attempt that did not succeed
+.venv/bin/python -m soc_agent investigate data/alerts/ALR-2026-0003.json   # benign typo on a privileged account
 
 # List the approved tools (add --schemas for the JSON schemas Hermes receives)
 .venv/bin/python -m soc_agent tools --schemas
@@ -52,8 +55,26 @@ SOC_FAULTS="lookup_ip=timeout" .venv/bin/python -m soc_agent investigate data/al
 ```
 
 Each run writes to `runs/<run-id>/`: `plan.json`, `tool_trace.json` (every tool call with its reason, arguments,
-outcome and duration), `evidence.json` (cited findings) and `audit.jsonl` (everything, timestamped).
-A sample trace and evidence report from a real run are in `docs/samples/`.
+outcome, result and duration), `evidence.json`, `timeline.json`, `investigation.json` (facts, ATT&CK mapping,
+severity, confidence, assessment) and `audit.jsonl` (everything, timestamped). Samples from a real run are in
+`docs/samples/`.
+
+## How a conclusion is reached (Day 3)
+
+1. **Timeline** - every event returned by `search_logs`, de-duplicated and sorted; bursts are grouped for reading.
+2. **Facts (code, not the model)** - `soc_agent/correlate.py` computes F1-F11 from the tool results, each with a
+   status and the log lines / records it rests on:
+   - `confirmed` - the evidence shows it
+   - `not_observed` - the data was searched and it is absent
+   - `unknown` - not searched, or the tool failed; stated as a gap, never assumed
+3. **ATT&CK mapping** - a technique is listed only when a confirmed fact justifies it.
+4. **Severity** (how bad if true) - fixed rules over the facts, e.g. brute force + success = high; plus an external
+   forwarding rule or files read on a high-criticality asset = critical.
+5. **Confidence** (how sure) - scored separately: lowered by unknown key facts, tool failures and conflicting
+   evidence; mock-only intel is noted as supporting evidence only.
+6. **Assessment (Hermes, no tools)** - sees only the facts, must cite fact ids for every claim, decides each
+   hypothesis (supported / refuted / undetermined), gives alternative explanations and unknowns, and states whether
+   it agrees with the rule-based severity. Citations of non-existent facts are rejected.
 
 ## Tools (Day 2)
 
@@ -82,7 +103,9 @@ Regenerate the synthetic data (deterministic, same seed gives identical files):
 .venv/bin/python -m pytest -q
 ```
 
-Tests run offline with a scripted model: no API key or network needed.
+Tests run offline with a scripted model: no API key or network needed. `tests/test_scenarios.py` holds the
+investigation test cases: suspicious (full evidence), incomplete evidence, tool failure, benign typo, attempt
+without success, conflicting evidence, and no evidence at all.
 
 ## Layout
 
@@ -96,6 +119,8 @@ data/assets/inventory.json             synthetic hosts and accounts
 data/generate_synthetic.py             seeded generator for the files above
 soc_agent/tools/                       the four tools, shared wrapper, Hermes registration
 soc_agent/investigate.py               evidence-gathering stage (tool-enabled Hermes agent)
+soc_agent/correlate.py                 timeline, evidence facts, ATT&CK mapping, severity and confidence (no model)
+soc_agent/assess.py                    Hermes assessment of the facts, with citation checks
 docs/samples/                          trace and evidence from a real run
 soc_agent/hermes_runtime.py            builds the Hermes agent (DeepSeek, isolated home, toolsets)
 soc_agent/planner.py                   prompt, plan parsing + checks, one repair retry

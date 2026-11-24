@@ -109,6 +109,7 @@ def execute(spec: ToolSpec, args: dict) -> dict:
                 "ok": env["ok"],
                 "error": env["error"],
                 "result_summary": _summarize(env["result"]),
+                "result": env["result"],
                 "duration_ms": env["duration_ms"],
                 "source": spec.source,
                 "mock": spec.mock,
