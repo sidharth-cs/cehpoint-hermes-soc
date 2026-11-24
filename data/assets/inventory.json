@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "note": "Synthetic asset inventory.",
+    "source": "synthetic-cmdb"
+  },
+  "accounts": {
+    "a.kumar@example.com": {
+      "department": "Finance",
+      "display_name": "A. Kumar",
+      "manager": "r.iyer@example.com",
+      "mfa_enrolled": true,
+      "privileged": false,
+      "title": "Treasury Analyst",
+      "usual_hours_utc": "03:30-12:30",
+      "usual_ips": [
+        "198.51.100.10",
+        "198.51.100.22"
+      ]
+    },
+    "j.doe@example.com": {
+      "department": "Finance",
+      "display_name": "J. Doe",
+      "manager": "r.iyer@example.com",
+      "mfa_enrolled": false,
+      "privileged": false,
+      "title": "AP Analyst",
+      "usual_hours_utc": "03:30-12:30",
+      "usual_ips": [
+        "198.51.100.10",
+        "198.51.100.22"
+      ]
+    },
+    "m.lee@example.com": {
+      "department": "HR",
+      "display_name": "M. Lee",
+      "manager": "p.nair@example.com",
+      "mfa_enrolled": true,
+      "privileged": false,
+      "title": "HR Generalist",
+      "usual_hours_utc": "03:30-12:30",
+      "usual_ips": [
+        "198.51.100.10"
+      ]
+    },
+    "s.rao@example.com": {
+      "department": "Engineering",
+      "display_name": "S. Rao",
+      "manager": "k.menon@example.com",
+      "mfa_enrolled": true,
+      "privileged": true,
+      "title": "Engineer",
+      "usual_hours_utc": "03:30-12:30",
+      "usual_ips": [
+        "198.51.100.10",
+        "198.51.100.22"
+      ]
+    }
+  },
+  "hosts": {
+    "WS-ENG-021": {
+      "criticality": "medium",
+      "department": "Engineering",
+      "os": "Ubuntu 24.04",
+      "owner": "s.rao@example.com",
+      "role": "Developer workstation",
+      "software": [
+        "Docker 27"
+      ]
+    },
+    "WS-FIN-009": {
+      "criticality": "high",
+      "department": "Finance",
+      "os": "Windows 11 23H2",
+      "owner": "a.kumar@example.com",
+      "role": "Treasury workstation",
+      "software": [
+        "Microsoft Outlook 2021"
+      ]
+    },
+    "WS-FIN-014": {
+      "criticality": "high",
+      "department": "Finance",
+      "os": "Windows 11 23H2",
+      "owner": "j.doe@example.com",
+      "role": "Accounts payable workstation",
+      "software": [
+        "Microsoft Outlook 2021",
+        "Citrix Workspace 2309"
+      ]
+    },
+    "WS-HR-003": {
+      "criticality": "medium",
+      "department": "HR",
+      "os": "Windows 11 23H2",
+      "owner": "m.lee@example.com",
+      "role": "HR workstation",
+      "software": [
+        "Microsoft Outlook 2021"
+      ]
+    }
+  }
+}

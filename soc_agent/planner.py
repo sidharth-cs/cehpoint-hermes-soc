@@ -33,7 +33,8 @@ Rules:
 - Any containment action (block IP, disable account, isolate host, reset password) is NOT a step. List it in
   safety_notes as "requires analyst approval".
 - Keep severity assessment for later; the plan only gathers evidence.
-- Arguments must only use values present in the alert (account, host, IPs, time window).
+- Arguments must only use values present in the alert (account, host, IPs, time window), or time windows
+  derived from it, such as a look-back period stated in the alert's rule. Say in the rationale how a window was derived.
 
 Answer these questions through the plan: {json.dumps(QUESTIONS)}
 

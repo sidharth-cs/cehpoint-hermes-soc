@@ -43,6 +43,9 @@ def build_agent(enabled_toolsets: list[str], model: str | None = None, max_itera
     if not api_key:
         raise MissingCredentials("DEEPSEEK_API_KEY is not set. Copy .env.example to .env and add your key.")
 
+    if "soc" in enabled_toolsets:
+        from .tools import register_with_hermes
+        register_with_hermes()
     from run_agent import AIAgent  # imported after HERMES_HOME is set
 
     return AIAgent(

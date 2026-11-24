@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "source": "MOCK local snapshot",
+    "note": "Small curated offline snapshot for the prototype. Not a live NVD or MITRE feed; descriptions are abbreviated. Verify against official sources before real use.",
+    "snapshot_date": "2026-11-20"
+  },
+  "entries": [
+    {"id": "T1110", "kind": "attack_technique", "name": "Brute Force", "tactic": "Credential Access",
+     "summary": "Adversaries guess credentials when passwords are unknown or hashes are obtained.", "keywords": ["brute force", "failed login", "password"]},
+    {"id": "T1110.001", "kind": "attack_technique", "name": "Brute Force: Password Guessing", "tactic": "Credential Access",
+     "summary": "Repeated password attempts against a single account.", "keywords": ["password guessing", "failed login", "single account"]},
+    {"id": "T1110.003", "kind": "attack_technique", "name": "Brute Force: Password Spraying", "tactic": "Credential Access",
+     "summary": "A few common passwords tried against many accounts to avoid lockouts.", "keywords": ["password spray", "many accounts", "failed login"]},
+    {"id": "T1110.004", "kind": "attack_technique", "name": "Brute Force: Credential Stuffing", "tactic": "Credential Access",
+     "summary": "Credentials from breach dumps tried against other services.", "keywords": ["credential stuffing", "breach", "failed login"]},
+    {"id": "T1078", "kind": "attack_technique", "name": "Valid Accounts", "tactic": "Initial Access / Persistence",
+     "summary": "Adversaries use legitimate credentials to gain or keep access.", "keywords": ["valid account", "successful login", "compromised credentials"]},
+    {"id": "T1114.003", "kind": "attack_technique", "name": "Email Collection: Email Forwarding Rule", "tactic": "Collection",
+     "summary": "Mailbox rules that forward mail to an adversary-controlled address.", "keywords": ["mailbox rule", "forwarding", "email"]},
+    {"id": "T1039", "kind": "attack_technique", "name": "Data from Network Shared Drive", "tactic": "Collection",
+     "summary": "Reading files from network shares to collect data of interest.", "keywords": ["file share", "file access", "network share"]},
+    {"id": "CVE-2023-23397", "kind": "cve", "name": "Microsoft Outlook elevation of privilege", "cvss": 9.8,
+     "summary": "Crafted message can make Outlook for Windows leak the user's NTLM hash to a remote server.",
+     "affects": ["Microsoft Outlook for Windows"], "keywords": ["outlook", "ntlm", "email"]},
+    {"id": "CVE-2021-44228", "kind": "cve", "name": "Apache Log4j2 remote code execution (Log4Shell)", "cvss": 10.0,
+     "summary": "JNDI lookups in log messages allow remote code execution in affected Log4j2 versions.",
+     "affects": ["Apache Log4j2"], "keywords": ["log4j", "jndi", "rce"]},
+    {"id": "CVE-2020-1472", "kind": "cve", "name": "Netlogon elevation of privilege (Zerologon)", "cvss": 10.0,
+     "summary": "Netlogon protocol flaw lets an attacker on the network take over a domain controller.",
+     "affects": ["Windows Server Netlogon"], "keywords": ["netlogon", "domain controller", "zerologon"]}
+  ]
+}

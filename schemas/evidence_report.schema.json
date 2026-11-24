@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence_report.schema.json",
+  "title": "Evidence report (Day 2)",
+  "description": "What the agent found with the approved tools. Every finding cites the tool and the refs it came from.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["alert_id", "evidence", "tool_failures", "open_questions"],
+  "properties": {
+    "alert_id": {"type": "string"},
+    "evidence": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["tool", "finding", "refs", "mock"],
+        "properties": {
+          "tool": {"enum": ["search_logs", "lookup_ip", "search_cve", "get_asset_context"]},
+          "finding": {"type": "string"},
+          "refs": {"type": "array", "items": {"type": "string"}},
+          "mock": {"type": "boolean"}
+        }
+      }
+    },
+    "tool_failures": {"type": "array", "items": {"type": "string"}},
+    "open_questions": {"type": "array", "items": {"type": "string"}}
+  }
+}

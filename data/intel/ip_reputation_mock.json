@@ -1,0 +1,55 @@
+{
+  "192.0.2.77": {
+    "asn": "AS64502 (documentation ASN)",
+    "country": "ZZ",
+    "first_seen": "2026-09-01",
+    "last_seen": "2026-11-20",
+    "reports": 4,
+    "score": 55,
+    "tags": [
+      "scanner"
+    ],
+    "verdict": "suspicious"
+  },
+  "198.51.100.10": {
+    "asn": "AS64501 (documentation ASN)",
+    "country": "IN",
+    "first_seen": "2024-01-15",
+    "last_seen": "2026-11-23",
+    "reports": 0,
+    "score": 2,
+    "tags": [
+      "corporate-egress"
+    ],
+    "verdict": "benign"
+  },
+  "198.51.100.22": {
+    "asn": "AS64501 (documentation ASN)",
+    "country": "IN",
+    "first_seen": "2024-01-15",
+    "last_seen": "2026-11-23",
+    "reports": 0,
+    "score": 4,
+    "tags": [
+      "corporate-vpn"
+    ],
+    "verdict": "benign"
+  },
+  "203.0.113.45": {
+    "asn": "AS64500 (documentation ASN)",
+    "country": "ZZ",
+    "first_seen": "2026-10-02",
+    "last_seen": "2026-11-23",
+    "reports": 23,
+    "score": 87,
+    "tags": [
+      "credential-stuffing",
+      "password-spray"
+    ],
+    "verdict": "malicious"
+  },
+  "_meta": {
+    "note": "Synthetic IP reputation for testing. Not live threat intelligence.",
+    "source": "MOCK"
+  }
+}

@@ -58,3 +58,19 @@ flowchart LR
 - **Schema at both ends.** Alerts are validated before they reach the model; the model's plan is validated after. A plan that names a tool outside the approved list is rejected, and the rejection reasons are sent back once for a corrected answer.
 - **No action steps.** Containment (block IP, disable account, isolate host) cannot appear as a plan step; it goes to `safety_notes` and will require analyst approval (Day 4).
 - **Authorized data only.** All data is synthetic: RFC 5737 documentation IPs (203.0.113.0/24), RFC 2606 domains (example.com), invented users and hosts. Every alert carries `data_provenance`.
+
+## Day 2: tool layer
+
+- **One wrapper, four tools.** `soc_agent/tools/base.py` is the only path a tool runs through: argument schema check,
+  semantic checks (e.g. no unbounded log dumps, 31-day window cap), 5 s timeout, result schema check, one envelope,
+  trace entry. A result that fails its schema is discarded (`malformed_output`), never shown to the model.
+- **Reasons are mandatory.** Every tool requires a `reason` argument, so the trace shows why the agent made each call.
+- **Least privilege.** Tools are registered in Hermes' registry under toolset `soc`; the evidence agent is built
+  with `enabled_toolsets=["soc"]` and its `valid_tool_names` are exactly the four tools (tested).
+- **Honest failures.** Empty results are findings ("absence of events"), unknown IPs are "unknown, not benign",
+  and tool errors are reported in the evidence report's `tool_failures`. `SOC_FAULTS` injects timeouts, malformed
+  output, unavailable data or crashes for demos and tests.
+- **Mock stays mock.** `lookup_ip` and `search_cve` set `mock: true` in every envelope, and an evidence report that
+  presents their findings as non-mock is rejected.
+- **Citable evidence.** Log events carry `ref` = `data/logs/events.jsonl#L<line>` so Day 3's timeline and Day 4's
+  report can link every claim to a source line.
