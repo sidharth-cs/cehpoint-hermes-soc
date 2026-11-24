@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "incident_report.schema.json",
+  "title": "Incident report (Day 4)",
+  "description": "Built only from audited run artifacts. Every fact carries its status and evidence refs.",
+  "type": "object",
+  "required": ["report_id", "generated_at", "alert_id", "run_id", "data_provenance", "summary", "alert", "severity",
+               "confidence", "model_severity_view", "hypotheses", "alternative_explanations", "unknowns", "facts",
+               "attack_mapping", "timeline", "response_actions", "tool_calls", "artifacts", "limitations"],
+  "properties": {
+    "report_id": {"type": "string", "pattern": "^IR-ALR-"},
+    "alert_id": {"type": "string", "pattern": "^ALR-[0-9]{4}-[0-9]{4,}$"},
+    "data_provenance": {"enum": ["synthetic", "cehpoint-sample", "lab"]},
+    "summary": {"type": "string", "minLength": 1},
+    "severity": {"type": "object", "required": ["level", "reasons"],
+                 "properties": {"level": {"enum": ["low", "medium", "high", "critical"]}, "reasons": {"type": "array", "minItems": 1}}},
+    "confidence": {"type": "object", "required": ["level", "reasons"],
+                   "properties": {"level": {"enum": ["low", "medium", "high"]}, "reasons": {"type": "array"}}},
+    "facts": {"type": "array", "minItems": 1, "items": {
+      "type": "object", "required": ["id", "statement", "status", "refs", "mock"],
+      "properties": {"id": {"type": "string", "pattern": "^F[0-9]+$"},
+                     "status": {"enum": ["confirmed", "not_observed", "unknown"]},
+                     "refs": {"type": "array", "items": {"type": "string"}}, "mock": {"type": "boolean"}}}},
+    "response_actions": {"type": "array", "items": {
+      "type": "object", "required": ["action_id", "action", "target", "fact_ids", "status", "requested_by", "target_system"],
+      "properties": {"action": {"enum": ["block_ip", "disable_account"]},
+                     "status": {"enum": ["pending_approval", "executed", "rejected"]},
+                     "requested_by": {"const": "hermes-agent"}, "target_system": {"type": "string"}}}},
+    "tool_calls": {"type": "array", "items": {"type": "object", "required": ["seq", "tool", "reason", "ok", "mock"]}},
+    "limitations": {"type": "array", "minItems": 1}
+  }
+}

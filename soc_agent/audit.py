@@ -18,6 +18,16 @@ class AuditLog:
         self.dir.mkdir(parents=True, exist_ok=True)
         self.path = self.dir / "audit.jsonl"
 
+    @classmethod
+    def open(cls, run_dir: Path) -> "AuditLog":
+        """Re-open an existing run (e.g. to record an analyst's approval decision later)."""
+        run_dir = Path(run_dir)
+        if not (run_dir / "audit.jsonl").exists():
+            raise FileNotFoundError(f"{run_dir} is not a run folder (no audit.jsonl)")
+        log = cls.__new__(cls)
+        log.run_id, log.dir, log.path = run_dir.name, run_dir, run_dir / "audit.jsonl"
+        return log
+
     def record(self, event: str, **data) -> None:
         line = {"ts": utc_now(), "run_id": self.run_id, "event": event, **data}
         with self.path.open("a") as f:
