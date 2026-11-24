@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Hermes SOC Analyst: an AI SOC analyst that investigates a real attack, cites every fact and waits for a human before it blocks">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="320" rx="18" fill="url(#bg)"/>
+  <rect width="1280" height="320" rx="18" fill="url(#grid)"/>
+  <g font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <g transform="translate(64 92)">
+      <path d="M22 0 L44 9 V27 C44 41 34 51 22 56 C10 51 0 41 0 27 V9 Z" fill="none" stroke="url(#accent)" stroke-width="3.5"/>
+      <path d="M12 28 L19 35 L33 20" fill="none" stroke="#e2e8f0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="128" y="128" font-size="50" font-weight="700" fill="#f1f5f9">Hermes SOC Analyst</text>
+    <text x="130" y="166" font-size="21" fill="#94a3b8">An AI analyst that investigates a real attack, cites every fact, and waits for a human before it blocks.</text>
+    <g font-size="16" font-weight="600" fill="#e2e8f0">
+      <g transform="translate(64 218)">
+        <rect width="132" height="40" rx="20" fill="#ef4444" fill-opacity="0.16" stroke="#ef4444" stroke-opacity="0.6"/>
+        <text x="66" y="26" text-anchor="middle">Attack</text>
+      </g>
+      <text x="212" y="244" fill="#64748b" font-size="20">&#8594;</text>
+      <g transform="translate(240 218)">
+        <rect width="132" height="40" rx="20" fill="#f59e0b" fill-opacity="0.14" stroke="#f59e0b" stroke-opacity="0.6"/>
+        <text x="66" y="26" text-anchor="middle">Detect</text>
+      </g>
+      <text x="388" y="244" fill="#64748b" font-size="20">&#8594;</text>
+      <g transform="translate(416 218)">
+        <rect width="150" height="40" rx="20" fill="#38bdf8" fill-opacity="0.14" stroke="#38bdf8" stroke-opacity="0.6"/>
+        <text x="75" y="26" text-anchor="middle">Investigate</text>
+      </g>
+      <text x="582" y="244" fill="#64748b" font-size="20">&#8594;</text>
+      <g transform="translate(610 218)">
+        <rect width="132" height="40" rx="20" fill="#a78bfa" fill-opacity="0.14" stroke="#a78bfa" stroke-opacity="0.6"/>
+        <text x="66" y="26" text-anchor="middle">Report</text>
+      </g>
+      <text x="758" y="244" fill="#64748b" font-size="20">&#8594;</text>
+      <g transform="translate(786 218)">
+        <rect width="172" height="40" rx="20" fill="#22c55e" fill-opacity="0.14" stroke="#22c55e" stroke-opacity="0.6"/>
+        <text x="86" y="26" text-anchor="middle">Human approves</text>
+      </g>
+      <text x="974" y="244" fill="#64748b" font-size="20">&#8594;</text>
+      <g transform="translate(1002 218)">
+        <rect width="150" height="40" rx="20" fill="#e2e8f0" fill-opacity="0.08" stroke="#e2e8f0" stroke-opacity="0.5"/>
+        <text x="75" y="26" text-anchor="middle">403 Blocked</text>
+      </g>
+    </g>
+    <text x="64" y="296" font-size="14" fill="#64748b">Hermes Agent · DeepSeek · MITRE ATT&amp;CK · FastAPI lab · human-in-the-loop</text>
+  </g>
+</svg>
